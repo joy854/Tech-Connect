@@ -9,11 +9,11 @@ export default function PostForm() {
   const { text, url, setText, setUrl, submitPost } = React.useContext(
     PostContext
   );
-  const { user } = React.useContext(UserContext);
+  const { user, toggleInsertPostHelper } = React.useContext(UserContext);
   if (!user.id) return <Redirect to='/' />;
   return (
     <section className='section mid-container'>
-      <form onSubmit={submitPost}>
+      <form>
         <h1>Posts</h1>
         <div className='form-center'>
           <div className='form-group'>
@@ -35,7 +35,10 @@ export default function PostForm() {
               cols='100'
               placeholder='Write Something Here....'
               value={text}
-              onChange={(e) => setText(e.target.value)}
+              onChange={(e) => {
+                setText(e.target.value);
+                console.log(text);
+              }}
             ></textarea>
             <p>
               <input
@@ -45,14 +48,25 @@ export default function PostForm() {
                 name='url'
                 placeholder='Enter Image Url (Optional)'
                 value={url}
-                onChange={(e) => setUrl(e.target.value)}
+                onChange={(e) => {
+                  setUrl(e.target.value);
+                  console.log(url);
+                }}
               />
             </p>
           </div>
-          <button type='submit' className='btn btn-primary'>
-            {/* <MdSend className='btn-icon' /> */}
-            Create Post
-          </button>
+          <input
+            type='button'
+            className='btn btn-primary'
+            value='Create Post'
+            onClick={() => {
+              submitPost();
+              toggleInsertPostHelper();
+            }}
+          />
+          {/* <MdSend className='btn-icon' /> */}
+
+          {/* </button> */}
           <PostList />
         </div>
       </form>

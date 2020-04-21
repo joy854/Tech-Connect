@@ -1,6 +1,7 @@
 import React from 'react';
 import { UserContext } from './user';
 import uuid from 'uuid/v4';
+import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 const PostContext = React.createContext();
 function PostProvider({ children }) {
@@ -9,40 +10,59 @@ function PostProvider({ children }) {
   const [text, setText] = React.useState('');
   const [url, setUrl] = React.useState('');
   const [post_id, setPost_id] = React.useState(uuid());
-  const [id, setId] = React.useState(user.id);
+  // const [id, setId] = React.useState(user.id);
 
-  const insertPost = async (e) => {
-    // console.log(id, post_id, text, url);
-    let response = await fetch('http://localhost:3001/insertPost', {
-      method: 'post',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
+  // const insertPost = async (e) => {
+  //   e.preventDefault();
+  //   console.log(id, post_id, text, url);
+  //   let response = await fetch('http://localhost:3001/insertPost', {
+  //     method: 'post',
+  //     headers: { 'Content-Type': 'application/json' },
+  //     body: JSON.stringify({
+  //       text,
+  //       url,
+  //       id,
+  //       post_id,
+  //     }),
+  //   })
+  //     .then((newUser) => newUser.json())
+  //     .then((item) => {
+  //       const obj = {
+  //         post_id,
+  //       };
+  //       return obj;
+  //     })
+  //     .catch((err) => console.log(err));
+  //   return response;
+  // };
+  async function insertPost() {
+    let id = user.id;
+    if (!id) {
+      // setPostsOfUser([]);
+      return;
+    }
+    const response = await axios
+      .post('http://localhost:3001/insertPost', {
+        id,
         text,
         url,
-        id,
         post_id,
-      }),
-    })
-      .then((newUser) => newUser.json())
-      .then((item) => {
-        const obj = {
-          post_id,
-        };
-        return obj;
       })
-      .catch((err) => console.log(err));
+      .then((res) => {
+        console.log(res.data);
+        return res.data;
+      })
+      .catch((error) => console.log(error));
     return response;
-  };
+  }
 
   const submitPost = async (e) => {
-    e.preventDefault();
-    // console.log(url);
+    // e.preventDefault();
+    console.log(url, text);
     const newId = uuid();
     setPost_id(newId);
-    setId(user.id);
-
     const res = await insertPost();
-    console.log(res);
+    // console.log(res);
   };
   //   if (!user.id) return <Redirect to='/' />;
   return (
