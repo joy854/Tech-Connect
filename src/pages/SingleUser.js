@@ -129,6 +129,7 @@ export default function SingleUser() {
           <h6>
             {person.city},{person.country}{' '}
           </h6>
+          {/* {user.id === id ? <h1>:<div></div> }   users are able to follow themselves */}
           {doesFollow ? (
             <button
               className='btn btn-danger'
@@ -150,6 +151,7 @@ export default function SingleUser() {
               Follow
             </button>
           )}
+          {/* {user.id === id? <h1 />:<div></div>} */}
           <br />
         </div>
         <div className='orientation'>

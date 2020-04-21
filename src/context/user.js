@@ -16,13 +16,16 @@ function UserProvider({ children }) {
   // const [user, setUser] = React.useState({ username: null, token: null });
   const [user, setUser] = React.useState(getUserFromLocalStorage());
   const [height, setHeight] = React.useState(0);
-
+  const [postsOfUser, setPostsOfUser] = React.useState([]);
   React.useEffect(() => {
     window.addEventListener('scroll', () => {
       setHeight(window.pageYOffset);
     });
     return () => window.removeEventListener('scroll', () => {});
   });
+
+  const addLike = () => {};
+  const dislike = () => {};
 
   const userLogin = (item) => {
     console.log(item.id, item.username);
@@ -36,26 +39,32 @@ function UserProvider({ children }) {
     // history.push('/');
     // return <Redirect to='/' />;
   };
-  const [alert, setAlert] = React.useState({
-    show: false,
-    msg: '',
-    type: 'success',
-  });
-  const showAlert = ({ msg, type = 'success' }) => {
-    setAlert({ show: true, msg, type });
-  };
-  const hideAlert = () => {
-    setAlert({ ...alert, show: false });
-  };
+  // const [alert, setAlert] = React.useState({
+  //   show: false,
+  //   msg: '',
+  //   type: 'success',
+  // });
+  React.useState(
+    {
+      // getPosts();
+    },
+    [user]
+  );
+  // const showAlert = ({ msg, type = 'success' }) => {
+  //   setAlert({ show: true, msg, type });
+  // };
+  // const hideAlert = () => {
+  //   setAlert({ ...alert, show: false });
+  // };
   return (
     <UserContext.Provider
       value={{
         user,
         userLogin,
         userLogout,
-        alert,
-        showAlert,
-        hideAlert,
+        // alert,
+        // showAlert,
+        // hideAlert,
         height,
       }}
     >
