@@ -58,6 +58,8 @@ function PostProvider({ children }) {
 
   const submitPost = async (e) => {
     // e.preventDefault();
+    setText('');
+    setUrl('');
     console.log(url, text);
     const newId = uuid();
     setPost_id(newId);

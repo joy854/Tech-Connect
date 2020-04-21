@@ -10,6 +10,24 @@ export default function PostForm() {
     PostContext
   );
   const { user, toggleInsertPostHelper } = React.useContext(UserContext);
+
+  const [btnClick, setBtnClick] = React.useState(false);
+
+  const toggleBtnClick = () => {
+    setBtnClick((prevMember) => {
+      let isMember = !prevMember;
+      return isMember;
+    });
+  };
+
+  const funPostlist = () => {
+    return <PostList />;
+  };
+
+  React.useEffect(() => {
+    funPostlist();
+  }, [btnClick]);
+
   if (!user.id) return <Redirect to='/' />;
   return (
     <section className='section mid-container'>
@@ -37,7 +55,6 @@ export default function PostForm() {
               value={text}
               onChange={(e) => {
                 setText(e.target.value);
-                console.log(text);
               }}
             ></textarea>
             <p>
@@ -50,7 +67,6 @@ export default function PostForm() {
                 value={url}
                 onChange={(e) => {
                   setUrl(e.target.value);
-                  console.log(url);
                 }}
               />
             </p>
@@ -62,12 +78,13 @@ export default function PostForm() {
             onClick={() => {
               submitPost();
               toggleInsertPostHelper();
+              toggleBtnClick();
             }}
           />
           {/* <MdSend className='btn-icon' /> */}
 
           {/* </button> */}
-          <PostList />
+          {funPostlist()}
         </div>
       </form>
     </section>

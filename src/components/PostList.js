@@ -12,7 +12,7 @@ export default function PostList() {
   return (
     <div>
       {postsOfUser.map((item) => {
-        return <PostItem key={uuid()} />;
+        return <PostItem key={uuid()} element={item} />;
       })}
     </div>
   );
