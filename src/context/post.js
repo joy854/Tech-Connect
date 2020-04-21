@@ -56,6 +56,27 @@ function PostProvider({ children }) {
     return response;
   }
 
+  async function deletePost(postid) {
+    let id = user.id;
+    console.log(id, postid);
+    if (!id) {
+      // setPostsOfUser([]);
+      return;
+    }
+
+    const response = await axios
+      .post('http://localhost:3001/deletePost', {
+        id,
+        postid,
+      })
+      .then((res) => {
+        console.log(res.data);
+        return res.data;
+      })
+      .catch((error) => console.log(error));
+    return response;
+  }
+
   const submitPost = async (e) => {
     // e.preventDefault();
     setText('');
@@ -75,6 +96,7 @@ function PostProvider({ children }) {
         url,
         setUrl,
         submitPost,
+        deletePost,
       }}
     >
       {children}

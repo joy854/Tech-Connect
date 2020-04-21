@@ -1,10 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../context/user';
+import { PostContext } from '../context/post';
+
 export default function PostItem({ element }) {
-  const { user } = React.useContext(UserContext);
+  const { user, toggleInsertPostHelper } = React.useContext(UserContext);
+  const { deletePost } = React.useContext(PostContext);
+  const postid = element.post_id;
   const urlOfPost = () => {
-    console.log(element.post_url);
     if (element.post_url)
       return (
         <div className='img-post-div'>
@@ -36,9 +39,16 @@ export default function PostItem({ element }) {
       {/* </div> */}
       <button className='btn btn-primary'>View Comments</button>
       {element.id === user.id && (
-        <button className='btn btn-danger' style={{ float: 'right' }}>
-          Delete Post
-        </button>
+        <input
+          type='button'
+          onClick={() => {
+            deletePost(postid);
+            toggleInsertPostHelper();
+          }}
+          value='Delete Post'
+          className='btn btn-danger'
+          style={{ float: 'right' }}
+        />
       )}
     </div>
   );
