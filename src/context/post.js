@@ -4,12 +4,22 @@ import uuid from 'uuid/v4';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 const PostContext = React.createContext();
+
+// function getPostsFromLocalStorage() {
+//   return localStorage.getItem('posts')
+//     ? JSON.parse(localStorage.getItem('posts'))
+//     : [];
+// }
+
 function PostProvider({ children }) {
-  const { user } = React.useContext(UserContext);
+  const { user, postsOfUser, setPostsOfUser, userDetails } = React.useContext(
+    UserContext
+  );
 
   const [text, setText] = React.useState('');
   const [url, setUrl] = React.useState('');
-  const [post_id, setPost_id] = React.useState(uuid());
+  // const [post_id, setPost_id] = React.useState(uuid());
+
   // const [id, setId] = React.useState(user.id);
 
   // const insertPost = async (e) => {
@@ -35,7 +45,7 @@ function PostProvider({ children }) {
   //     .catch((err) => console.log(err));
   //   return response;
   // };
-  async function insertPost() {
+  async function insertPost(post_id) {
     let id = user.id;
     if (!id) {
       // setPostsOfUser([]);
@@ -55,6 +65,24 @@ function PostProvider({ children }) {
       .catch((error) => console.log(error));
     return response;
   }
+
+  const insertPostForUser = () => {
+    const pid = uuid();
+    const item = {
+      id: user.id,
+      content: text,
+      post_url: url,
+      image_url: userDetails.image,
+      post_id: pid,
+      username: userDetails.username,
+      fname: userDetails.fname,
+      lname: userDetails.lname,
+    };
+
+    setPostsOfUser([item, ...postsOfUser]);
+    console.log('insert user', postsOfUser);
+    insertPost(pid);
+  };
 
   async function deletePost(postid) {
     let id = user.id;
@@ -77,26 +105,44 @@ function PostProvider({ children }) {
     return response;
   }
 
+  const deletePostForUser = (postid) => {
+    const newArr = postsOfUser.filter((item) => {
+      if (item.id !== userDetails.id || item.post_id !== postid) return item;
+    });
+
+    setPostsOfUser(newArr);
+    console.log('delete user', postsOfUser);
+    deletePost(postid);
+  };
+
   const submitPost = async (e) => {
     // e.preventDefault();
+
+    console.log(url, text);
+
+    // const res = await insertPost();
+    insertPostForUser();
     setText('');
     setUrl('');
-    console.log(url, text);
-    const newId = uuid();
-    setPost_id(newId);
-    const res = await insertPost();
     // console.log(res);
   };
+
+  // React.useEffect(() => {
+  //   getPosts(); //will result in error when user signs out
+  //   console.log('posts', postsOfUser);
+  // }, [user.id]);
+
   //   if (!user.id) return <Redirect to='/' />;
   return (
     <PostContext.Provider
       value={{
         text,
+
         setText,
         url,
         setUrl,
         submitPost,
-        deletePost,
+        deletePostForUser,
       }}
     >
       {children}

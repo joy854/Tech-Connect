@@ -12,27 +12,83 @@ function getUserFromLocalStorage() {
     ? JSON.parse(localStorage.getItem('user'))
     : { username: null, id: null };
 }
-
-function getPostsFromLocalStorage() {
-  return localStorage.getItem('posts')
-    ? JSON.parse(localStorage.getItem('posts'))
-    : [];
+function getUserDetailFromLocalStorage() {
+  return localStorage.getItem('detail')
+    ? JSON.parse(localStorage.getItem('detail'))
+    : { username: null, id: null };
 }
 
 function UserProvider({ children }) {
   const [user, setUser] = React.useState(getUserFromLocalStorage());
-  const [height, setHeight] = React.useState(0);
-  const [postsOfUser, setPostsOfUser] = React.useState(
-    getPostsFromLocalStorage()
+  const [userDetails, setUserDetails] = React.useState(
+    getUserDetailFromLocalStorage()
   );
-  const [toggleInsertPost, setToggleInsertPost] = React.useState(false);
+  const [height, setHeight] = React.useState(0);
+  const [postsOfUser, setPostsOfUser] = React.useState([]);
+  const [visibleComments, setVisibleComments] = React.useState([]);
 
-  const toggleInsertPostHelper = () => {
-    setToggleInsertPost((prevMember) => {
-      let isMember = !prevMember;
-      return isMember;
-    });
-  };
+  async function getPosts(userid) {
+    // let userid = user.id;
+    if (!userid) {
+      // setPostsOfUser([]);
+      return;
+    }
+    const response = await axios
+      .post('http://localhost:3001/getPosts', {
+        userid,
+      })
+      .then((res) => {
+        console.log('posts', res.data);
+        // localStorage.setItem('posts', JSON.stringify(res.data));
+        setPostsOfUser(res.data);
+        return res.data;
+      })
+      .catch((error) => console.log(error));
+    return response;
+  }
+
+  async function getComments(userid) {
+    // let userid = user.id;
+    if (!userid) {
+      // setPostsOfUser([]);
+      return;
+    }
+    const response = await axios
+      .post('http://localhost:3001/getComments', {
+        userid,
+      })
+      .then((res) => {
+        console.log('comments', res.data);
+        // localStorage.setItem('posts', JSON.stringify(res.data));
+        setVisibleComments(res.data);
+        return res.data;
+      })
+      .catch((error) => console.log(error));
+    return response;
+  }
+
+  async function getDetails(userid) {
+    const response = await axios
+      .post('http://localhost:3001/getDetails', {
+        userid,
+      })
+      .then((res) => {
+        console.log('user', res.data);
+        localStorage.setItem('detail', JSON.stringify(res.data));
+        setUserDetails(res.data);
+        return res.data;
+      })
+      .catch((error) => console.log(error));
+    return response;
+  }
+  // const [toggleInsertPost, setToggleInsertPost] = React.useState(false);
+
+  // const toggleInsertPostHelper = () => {
+  //   setToggleInsertPost((prevMember) => {
+  //     let isMember = !prevMember;
+  //     return isMember;
+  //   });
+  // };
   // React.useEffect(() => {
   //   window.addEventListener('scroll', () => {
   //     setHeight(window.pageYOffset);
@@ -44,8 +100,13 @@ function UserProvider({ children }) {
   // const dislike = () => {};
 
   const userLogin = (item) => {
-    console.log(item.id, item.username);
     setUser(item);
+    getDetails(item.id);
+    getPosts(item.id);
+    getComments(item.id);
+    // console.log(item.id, item.username, userDetails);
+    // console.log('posts', postsOfUser);
+    // console.log('comments', visibleComments);
     localStorage.setItem('user', JSON.stringify(item));
   };
 
@@ -61,30 +122,12 @@ function UserProvider({ children }) {
   //   type: 'success',
   // });
 
-  async function getPosts() {
-    let userid = user.id;
-    if (!userid) {
-      // setPostsOfUser([]);
-      return;
-    }
-    const response = await axios
-      .post('http://localhost:3001/getPosts', {
-        userid,
-      })
-      .then((res) => {
-        console.log(res.data);
-        localStorage.setItem('posts', JSON.stringify(res.data));
-        setPostsOfUser(res.data);
-        return res.data;
-      })
-      .catch((error) => console.log(error));
-    return response;
-  }
-
-  React.useEffect(() => {
-    getPosts(); //will result in error when user signs out
-    console.log('posts', postsOfUser);
-  }, [user, toggleInsertPost]);
+  // React.useEffect(() => {
+  //   getPosts(); //will result in error when user signs out
+  //   getComments();
+  //   console.log('posts', postsOfUser);
+  //   console.log('comments', visibleComments);
+  // }, [user]);
   // const showAlert = ({ msg, type = 'success' }) => {
   //   setAlert({ show: true, msg, type });
   // };
@@ -95,10 +138,13 @@ function UserProvider({ children }) {
     <UserContext.Provider
       value={{
         user,
+        setUser,
+        userDetails,
         userLogin,
         userLogout,
         postsOfUser,
-        toggleInsertPostHelper,
+        setPostsOfUser,
+        visibleComments,
         // alert,
         // showAlert,
         // hideAlert,

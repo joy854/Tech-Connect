@@ -4,8 +4,11 @@ import { UserContext } from '../context/user';
 import { PostContext } from '../context/post';
 
 export default function PostItem({ element }) {
-  const { user, toggleInsertPostHelper } = React.useContext(UserContext);
-  const { deletePost } = React.useContext(PostContext);
+  //   const { user, toggleInsertPostHelper } = React.useContext(UserContext);
+  const { user, visibleComments } = React.useContext(UserContext);
+  const [showComment, setShowComment] = React.useState(false);
+  const { deletePostForUser } = React.useContext(PostContext);
+
   const postid = element.post_id;
   const urlOfPost = () => {
     if (element.post_url)
@@ -16,6 +19,14 @@ export default function PostItem({ element }) {
       );
     return <div></div>;
   };
+
+  const toggleShowComment = () => {
+    setShowComment((prevMember) => {
+      let isMember = !prevMember;
+      return isMember;
+    });
+  };
+
   return (
     <div className='post-item-container'>
       <div className=''>
@@ -42,8 +53,8 @@ export default function PostItem({ element }) {
         <input
           type='button'
           onClick={() => {
-            deletePost(postid);
-            toggleInsertPostHelper();
+            deletePostForUser(postid);
+            // toggleInsertPostHelper();
           }}
           value='Delete Post'
           className='btn btn-danger'

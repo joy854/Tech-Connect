@@ -9,24 +9,24 @@ export default function PostForm() {
   const { text, url, setText, setUrl, submitPost } = React.useContext(
     PostContext
   );
-  const { user, toggleInsertPostHelper } = React.useContext(UserContext);
+  const { user, postsOfUser } = React.useContext(UserContext);
 
-  const [btnClick, setBtnClick] = React.useState(false);
+  // const [btnClick, setBtnClick] = React.useState(false);
 
-  const toggleBtnClick = () => {
-    setBtnClick((prevMember) => {
-      let isMember = !prevMember;
-      return isMember;
-    });
-  };
+  // const toggleBtnClick = () => {
+  //   setBtnClick((prevMember) => {
+  //     let isMember = !prevMember;
+  //     return isMember;
+  //   });
+  // };
 
-  const funPostlist = () => {
-    return <PostList />;
-  };
+  // const funPostlist = () => {
+  //   return <PostList />;
+  // };
 
-  React.useEffect(() => {
-    funPostlist();
-  }, [btnClick]);
+  // React.useEffect(() => {
+  //   funPostlist();
+  // }, [postsOfUser]);
 
   if (!user.id) return <Redirect to='/' />;
   return (
@@ -77,14 +77,24 @@ export default function PostForm() {
             value='Create Post'
             onClick={() => {
               submitPost();
-              toggleInsertPostHelper();
-              toggleBtnClick();
+              console.log(postsOfUser);
+              // toggleBtnClick();
             }}
           />
+          {/* <button
+            className='btn btn-primary'
+            onClick={() => {
+              submitPost();
+              // toggleBtnClick();
+            }}
+          >
+            Create Post
+          </button> */}
           {/* <MdSend className='btn-icon' /> */}
 
           {/* </button> */}
-          {funPostlist()}
+          {/* {funPostlist()} */}
+          <PostList />
         </div>
       </form>
     </section>
