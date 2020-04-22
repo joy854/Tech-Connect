@@ -7,8 +7,13 @@ import CommentList from './CommentList';
 
 export default function PostItem({ element }) {
   //   const { user, toggleInsertPostHelper } = React.useContext(UserContext);
-  const { user, visibleComments } = React.useContext(UserContext);
-  const [showComment, setShowComment] = React.useState(false);
+  const {
+    user,
+    visibleComments,
+    showComment,
+    toggleShowComment,
+  } = React.useContext(UserContext);
+
   const { deletePostForUser } = React.useContext(PostContext);
 
   const postid = element.post_id;
@@ -20,13 +25,6 @@ export default function PostItem({ element }) {
         </div>
       );
     return <div></div>;
-  };
-
-  const toggleShowComment = () => {
-    setShowComment((prevMember) => {
-      let isMember = !prevMember;
-      return isMember;
-    });
   };
 
   return (

@@ -39,6 +39,14 @@ function UserProvider({ children }) {
   const [height, setHeight] = React.useState(0);
   const [postsOfUser, setPostsOfUser] = React.useState([]);
   const [visibleComments, setVisibleComments] = React.useState([]);
+  const [showComment, setShowComment] = React.useState(false);
+
+  const toggleShowComment = () => {
+    setShowComment((prevMember) => {
+      let isMember = !prevMember;
+      return isMember;
+    });
+  };
 
   async function getPosts(userid) {
     // let userid = user.id;
@@ -267,6 +275,8 @@ function UserProvider({ children }) {
         getPosts,
         delCommentForUser,
         addCommentForUser,
+        showComment,
+        toggleShowComment,
         // alert,
         // showAlert,
         // hideAlert,
