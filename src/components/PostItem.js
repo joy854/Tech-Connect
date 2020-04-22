@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../context/user';
 import { PostContext } from '../context/post';
+import CommentItem from './CommentItem';
+import CommentList from './CommentList';
 
 export default function PostItem({ element }) {
   //   const { user, toggleInsertPostHelper } = React.useContext(UserContext);
@@ -29,38 +31,46 @@ export default function PostItem({ element }) {
 
   return (
     <div className='post-item-container'>
-      <div className=''>
-        <img
-          src={element.image_url}
-          alt='No Profile Picture'
-          className='img-profile-post'
-        />
-        &nbsp;&nbsp;&nbsp;
-        <span>
-          {element.fname} {element.lname}
-        </span>
-      </div>
-      {/* <div> */}
-      {urlOfPost()}
+      <div style={{ marginBottom: '0.5rem' }}>
+        <div className=''>
+          <img
+            src={element.image_url}
+            alt='No Profile Picture'
+            className='img-profile-post'
+          />
+          &nbsp;&nbsp;&nbsp;
+          <span>
+            {element.fname} {element.lname}
+          </span>
+        </div>
+        {/* <div> */}
+        {urlOfPost()}
 
-      <p>{element.content}</p>
-      {/* <Link to={url} className='btn btn-primary'>
+        <p>{element.content}</p>
+        {/* <Link to={url} className='btn btn-primary'>
           View Profile
         </Link> */}
-      {/* </div> */}
-      <button className='btn btn-primary'>View Comments</button>
-      {element.id === user.id && (
+        {/* </div> */}
         <input
           type='button'
-          onClick={() => {
-            deletePostForUser(postid);
-            // toggleInsertPostHelper();
-          }}
-          value='Delete Post'
-          className='btn btn-danger'
-          style={{ float: 'right' }}
+          value='View Comments'
+          className='btn btn-primary'
+          onClick={toggleShowComment}
         />
-      )}
+        {element.id === user.id && (
+          <input
+            type='button'
+            onClick={() => {
+              deletePostForUser(postid);
+              // toggleInsertPostHelper();
+            }}
+            value='Delete Post'
+            className='btn btn-danger'
+            style={{ float: 'right' }}
+          />
+        )}
+      </div>
+      {showComment && <CommentList post={element} />}
     </div>
   );
 }

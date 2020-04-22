@@ -9,7 +9,41 @@ export default function PostForm() {
   const { text, url, setText, setUrl, submitPost } = React.useContext(
     PostContext
   );
-  const { user, postsOfUser } = React.useContext(UserContext);
+  const {
+    user,
+    postsOfUser,
+    setPostsOfUser,
+    getComments,
+    getPosts,
+    visibleComments,
+    setVisibleComments,
+  } = React.useContext(UserContext);
+
+  function getCommentsDetailFromLocalStorage() {
+    return localStorage.getItem('comments')
+      ? JSON.parse(localStorage.getItem('comments'))
+      : [];
+  }
+
+  function getPostsDetailFromLocalStorage() {
+    return localStorage.getItem('posts')
+      ? JSON.parse(localStorage.getItem('posts'))
+      : [];
+  }
+
+  React.useEffect(() => {
+    getPosts(); //will result in error when user signs out
+    getComments();
+    if (window.performance) {
+      if (performance.navigation.type == 1) {
+        setPostsOfUser(getPostsDetailFromLocalStorage());
+        setVisibleComments(getCommentsDetailFromLocalStorage());
+        // alert('This page is reloaded');
+      }
+    }
+    console.log('posts', postsOfUser);
+    // console.log('comments', visibleComments);
+  }, []);
 
   // const [btnClick, setBtnClick] = React.useState(false);
 

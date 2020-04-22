@@ -18,6 +18,18 @@ function getUserDetailFromLocalStorage() {
     : { username: null, id: null };
 }
 
+// function getCommentsDetailFromLocalStorage() {
+//   return localStorage.getItem('comments')
+//     ? JSON.parse(localStorage.getItem('comments'))
+//     : [];
+// }
+
+// function getPostsDetailFromLocalStorage() {
+//   return localStorage.getItem('posts')
+//     ? JSON.parse(localStorage.getItem('posts'))
+//     : [];
+// }
+
 function UserProvider({ children }) {
   const [user, setUser] = React.useState(getUserFromLocalStorage());
   const [userDetails, setUserDetails] = React.useState(
@@ -39,7 +51,7 @@ function UserProvider({ children }) {
       })
       .then((res) => {
         console.log('posts', res.data);
-        // localStorage.setItem('posts', JSON.stringify(res.data));
+        localStorage.setItem('posts', JSON.stringify(res.data));
         setPostsOfUser(res.data);
         return res.data;
       })
@@ -59,7 +71,7 @@ function UserProvider({ children }) {
       })
       .then((res) => {
         console.log('comments', res.data);
-        // localStorage.setItem('posts', JSON.stringify(res.data));
+        localStorage.setItem('comments', JSON.stringify(res.data));
         setVisibleComments(res.data);
         return res.data;
       })
@@ -145,6 +157,9 @@ function UserProvider({ children }) {
         postsOfUser,
         setPostsOfUser,
         visibleComments,
+        setVisibleComments,
+        getComments,
+        getPosts,
         // alert,
         // showAlert,
         // hideAlert,
