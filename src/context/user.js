@@ -1,6 +1,7 @@
 // user context
 import React from 'react';
 import axios from 'axios';
+import uuid from 'uuid/v4';
 // import { useHistory } from 'react-router-dom';
 // const history = useHistory();
 import { Redirect } from 'react-router-dom';
@@ -111,6 +112,110 @@ function UserProvider({ children }) {
   // const addLike = () => {};
   // const dislike = () => {};
 
+  async function delComment(id, comment_id, post_id) {
+    // let userid = user.id;
+    if (!id) {
+      // setPostsOfUser([]);
+      return;
+    }
+    const response = await axios
+      .post('http://localhost:3001/deleteComment', {
+        id,
+        comment_id,
+        post_id,
+      })
+      .then((res) => {
+        console.log('comments', res.data);
+        return res.data;
+      })
+      .catch((error) => console.log(error));
+    return response;
+  }
+  const delCommentForUser = (id, comment_id, post_id) => {
+    const newComments = visibleComments.filter((item) => {
+      if (
+        id !== item.id ||
+        comment_id !== item.comment_id ||
+        post_id != item.post_id
+      )
+        return item;
+    });
+    console.log(newComments);
+    setVisibleComments(newComments);
+    delComment(id, comment_id, post_id);
+  };
+
+  async function addComment(
+    username,
+    fname,
+    lname,
+    commenter_id,
+    id,
+    post_id,
+    image,
+    content,
+    comment_id
+  ) {
+    // let userid = user.id;
+    if (!id) {
+      // setPostsOfUser([]);
+      return;
+    }
+    const response = await axios
+      .post('http://localhost:3001/insertComment', {
+        username,
+        fname,
+        lname,
+        commenter_id,
+        id,
+        post_id,
+        image,
+        content,
+        comment_id,
+      })
+      .then((res) => {
+        console.log('comments', res.data);
+        return res.data;
+      })
+      .catch((error) => console.log(error));
+    return response;
+  }
+  const addCommentForUser = (
+    username,
+    fname,
+    lname,
+    commenter_id,
+    id,
+    post_id,
+    image,
+    content
+  ) => {
+    let c_id = uuid();
+    const newItem = {
+      username,
+      fname,
+      lname,
+      commenter_id,
+      id,
+      post_id,
+      image,
+      content,
+      comment_id: c_id,
+    };
+    console.log(newItem);
+    setVisibleComments([newItem, ...visibleComments]);
+    addComment(
+      username,
+      fname,
+      lname,
+      commenter_id,
+      id,
+      post_id,
+      image,
+      content,
+      c_id
+    );
+  };
   const userLogin = (item) => {
     setUser(item);
     getDetails(item.id);
@@ -160,6 +265,8 @@ function UserProvider({ children }) {
         setVisibleComments,
         getComments,
         getPosts,
+        delCommentForUser,
+        addCommentForUser,
         // alert,
         // showAlert,
         // hideAlert,

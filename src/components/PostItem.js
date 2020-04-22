@@ -63,6 +63,7 @@ export default function PostItem({ element }) {
             onClick={() => {
               deletePostForUser(postid);
               // toggleInsertPostHelper();
+              localStorage.setItem('comments', JSON.stringify(visibleComments));
             }}
             value='Delete Post'
             className='btn btn-danger'

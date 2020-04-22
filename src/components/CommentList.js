@@ -3,7 +3,9 @@ import CommentItem from './CommentItem';
 import { UserContext } from '../context/user';
 import uuid from 'uuid/v4';
 export default function CommentList({ post }) {
-  const { userDetails, visibleComments } = React.useContext(UserContext);
+  const { userDetails, visibleComments, addCommentForUser } = React.useContext(
+    UserContext
+  );
 
   const returnComments = () => {
     const newList = visibleComments.filter((item) => {
@@ -16,6 +18,8 @@ export default function CommentList({ post }) {
     });
     return arr;
   };
+
+  const [inputText, setInputText] = React.useState('');
   return (
     <div className=''>
       <div class='row'>
@@ -32,11 +36,39 @@ export default function CommentList({ post }) {
         </div>
 
         <div class='col-md-8 '>
-          <input type='text' placeholder='Enter your Comment!' />
+          <input
+            type='text'
+            value={inputText}
+            onChange={(e) => setInputText(e.target.value)}
+          />
         </div>
 
         <div class='col-md-2 '>
-          <input type='button' className='btn btn-primary' value='Add' />
+          <input
+            type='button'
+            className='btn btn-primary'
+            value='Add'
+            onClick={() => {
+              let username = userDetails.username;
+              let fname = userDetails.fname;
+              let lname = userDetails.lname;
+              let commenter_id = userDetails.id;
+              let id = post.id;
+              let post_id = post.post_id;
+              let image = userDetails.image;
+              let content = inputText;
+              addCommentForUser(
+                username,
+                fname,
+                lname,
+                commenter_id,
+                id,
+                post_id,
+                image,
+                content
+              );
+            }}
+          />
           {/* <Link to={url} className='btn btn-primary'>
           View Profile
         </Link> */}
