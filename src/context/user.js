@@ -40,7 +40,8 @@ function UserProvider({ children }) {
   const [postsOfUser, setPostsOfUser] = React.useState([]);
   const [visibleComments, setVisibleComments] = React.useState([]);
   const [showComment, setShowComment] = React.useState(false);
-
+  const [allChats, setAllChats] = React.useState([]);
+  const [chatText, setChatText] = React.useState('');
   const toggleShowComment = () => {
     setShowComment((prevMember) => {
       let isMember = !prevMember;
@@ -97,6 +98,20 @@ function UserProvider({ children }) {
         console.log('user', res.data);
         localStorage.setItem('detail', JSON.stringify(res.data));
         setUserDetails(res.data);
+        return res.data;
+      })
+      .catch((error) => console.log(error));
+    return response;
+  }
+
+  async function getChats() {
+    // let userid = user.id;
+    const response = await axios
+      .get('http://localhost:3001/getChats', {})
+      .then((res) => {
+        localStorage.setItem('chats', JSON.stringify(res.data));
+        setAllChats(res.data);
+        console.log('chats', res.data);
         return res.data;
       })
       .catch((error) => console.log(error));
@@ -224,11 +239,51 @@ function UserProvider({ children }) {
       c_id
     );
   };
+
+  async function insertChat(userid, newId) {
+    const response = await axios
+      .post('http://localhost:3001/insertChat', {
+        id_from: userDetails.id,
+        id_to: userid,
+        chat_id: newId,
+        from_fname: userDetails.fname,
+        to_fname: '',
+        msg: chatText,
+        image_from: userDetails.image,
+        image_to: '',
+      })
+      .then((res) => {
+        console.log('user', res.data);
+        localStorage.setItem('detail', JSON.stringify(res.data));
+        // setUserDetails(res.data);
+        return res.data;
+      })
+      .catch((error) => console.log(error));
+    return response;
+  }
+
+  const insertChatByUser = (id_to) => {
+    const newId = uuid();
+    const item = {
+      id_from: userDetails.id,
+      id_to,
+      chat_id: newId,
+      from_fname: userDetails.fname,
+      to_fname: '',
+      msg: chatText,
+      image_from: userDetails.image,
+      image_to: '',
+    };
+    setAllChats([item, ...allChats]);
+    insertChat(id_to, newId);
+  };
+
   const userLogin = (item) => {
     setUser(item);
     getDetails(item.id);
     getPosts(item.id);
     getComments(item.id);
+    getChats();
     // console.log(item.id, item.username, userDetails);
     // console.log('posts', postsOfUser);
     // console.log('comments', visibleComments);
@@ -277,6 +332,12 @@ function UserProvider({ children }) {
         addCommentForUser,
         showComment,
         toggleShowComment,
+        allChats,
+        setAllChats,
+        chatText,
+        setChatText,
+        insertChatByUser,
+        getChats,
         // alert,
         // showAlert,
         // hideAlert,

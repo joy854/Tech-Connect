@@ -8,6 +8,7 @@ import NavBar from './components/NavBar';
 import PostForm from './components/PostForm';
 import UserList from './components/UserList';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import ChatForm from './components/ChatForm';
 
 export default function App() {
   return (
@@ -30,6 +31,11 @@ export default function App() {
           <Route exact path='/login'>
             <Login />
           </Route>
+          <Route
+            exact
+            path='/chats/:id_to'
+            children={<ChatForm></ChatForm>}
+          ></Route>
           <Route
             exact
             path='/users/:id'

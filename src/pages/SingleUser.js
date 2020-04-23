@@ -4,6 +4,7 @@ import { UsersContext, UsersProvider } from '../context/users';
 import { UserContext } from '../context/user';
 import { Redirect } from 'react-router-dom';
 import { FaFire } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 export default function SingleUser() {
   const { id } = useParams();
@@ -11,6 +12,8 @@ export default function SingleUser() {
   const { users, titles, followers, followBtn, unFollowBtn } = React.useContext(
     UsersContext
   );
+  const url = `/chats/${parseInt(id)}`;
+
   const evalDoesFollow = () => {
     const isFollow = followers.filter((item) => {
       if (item.to_id === parseInt(id) && item.from_id === user.id) return item;
@@ -152,6 +155,10 @@ export default function SingleUser() {
             </button>
           )}
           {/* {user.id === id? <h1 />:<div></div>} */}
+
+          <Link to={url} className='btn btn-primary' style={{ margin: '1%' }}>
+            Message
+          </Link>
           <br />
         </div>
         <div className='orientation'>
