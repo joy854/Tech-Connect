@@ -11,7 +11,9 @@ export default function SkillForm() {
     <form onSubmit={handleAdd}>
       <div className='form-center'>
         <div className='form-group'>
-          <label htmlFor='skill'>Skill</label>
+          <label htmlFor='skill' style={{ textAlign: 'left' }}>
+            Skills
+          </label>
           <input
             type='text'
             className='form-control'
@@ -22,7 +24,7 @@ export default function SkillForm() {
             onChange={handleSingleSkill}
           />
         </div>
-        <button type='submit' className='btn btn-primary'>
+        <button type='submit' className='BUTTON_LAI'>
           {/* <MdSend className='btn-icon' /> */}
           Add
         </button>

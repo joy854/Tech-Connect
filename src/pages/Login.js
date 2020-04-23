@@ -206,142 +206,188 @@ export default function Login() {
   // };
   if (!user.id) {
     return (
-      <section className='form section'>
-        {/* {check} */}
-        <h2 className='section-title'>{isMember ? 'sign in' : 'register'}</h2>
-        <form className='login-form'>
-          {/* single input */}
-          {!isMember && (
-            <div className='form-control'>
-              <label htmlFor='fname'>First Name</label>
-              <input
-                type='text'
-                id='fname'
-                value={fName}
-                onChange={(e) => setFName(e.target.value)}
-              />
+      <div className='contain' style={{ textAlign: 'center' }}>
+        <section className='form section'>
+          {/* {check} */}
+          <h2 className='section-title'>{isMember ? 'Sign In' : 'Register'}</h2>
+          <form className='login-form'>
+            {/* single input */}
+            {!isMember && (
+              <div className='row orientation' style={{ padding: '1.75%' }}>
+                <div className='col-md-4'>
+                  <label htmlFor='fname'>First Name</label>
+                </div>
+                <div className='col-md-8'>
+                  <input
+                    type='text'
+                    id='fname'
+                    style={{ backgroundColor: '#7f7676', color: 'white' }}
+                    value={fName}
+                    onChange={(e) => setFName(e.target.value)}
+                  />
+                </div>
+              </div>
+            )}
+            {/* end of single input */}
+            {/* single input */}
+            {!isMember && (
+              <div className='row orientation' style={{ padding: '1.75%' }}>
+                <div className='col-md-4'>
+                  <label htmlFor='lname'>Last Name</label>
+                </div>
+                <div className='col-md-8'>
+                  <input
+                    type='text'
+                    id='lname'
+                    style={{ backgroundColor: '#7f7676', color: 'white' }}
+                    value={lName}
+                    onChange={(e) => setLName(e.target.value)}
+                  />
+                </div>
+              </div>
+            )}
+            {/* end of single input */}
+            {/* single input */}
+            <div className='row orientation' style={{ padding: '1.75%' }}>
+              <div className='col-md-4'>
+                <label htmlFor='email'>Email</label>
+              </div>
+              <div className='col-md-8'>
+                <input
+                  type='email'
+                  id='email'
+                  value={email}
+                  style={{ backgroundColor: '#7f7676', color: 'white' }}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
             </div>
-          )}
-          {/* end of single input */}
-          {/* single input */}
-          {!isMember && (
-            <div className='form-control'>
-              <label htmlFor='lname'>Last Name</label>
-              <input
-                type='text'
-                id='lname'
-                value={lName}
-                onChange={(e) => setLName(e.target.value)}
-              />
+            {/* end of single input */}
+            {/* single input */}
+            <div className='row orientation' style={{ padding: '1.75%' }}>
+              <div className='col-md-4'>
+                <label htmlFor='password'>Password</label>
+              </div>
+              <div className='col-md-8'>
+                <input
+                  type='password'
+                  id='password'
+                  value={password}
+                  style={{ backgroundColor: '#7f7676', color: 'white' }}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
             </div>
-          )}
-          {/* end of single input */}
-          {/* single input */}
-          <div className='form-control'>
-            <label htmlFor='email'>email</label>
-            <input
-              type='email'
-              id='email'
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          {/* end of single input */}
-          {/* single input */}
-          <div className='form-control'>
-            <label htmlFor='password'>password</label>
-            <input
-              type='password'
-              id='password'
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          {/* end of single input */}
-          {/* single input */}
-          {!isMember && (
-            <div className='form-control'>
-              <label htmlFor='username'>username</label>
-              <input
-                type='text'
-                id='username'
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-            </div>
-          )}
+            {/* end of single input */}
+            {/* single input */}
+            {!isMember && (
+              <div className='row orientation' style={{ padding: '1.75%' }}>
+                <div className='col-md-4'>
+                  <label htmlFor='username'>Username</label>
+                </div>
+                <div className='col-md-8'>
+                  <input
+                    type='text'
+                    id='username'
+                    style={{ backgroundColor: '#7f7676', color: 'white' }}
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                  />
+                </div>
+              </div>
+            )}
 
-          {/* end of single input */}
-          {/* single input */}
-          {!isMember && (
-            <div className='form-control'>
-              <label htmlFor='institute'>institute</label>
-              <input
-                type='text'
-                id='institute'
-                value={institute}
-                onChange={(e) => setInstitute(e.target.value)}
-              />
-            </div>
-          )}
+            {/* end of single input */}
+            {/* single input */}
+            {!isMember && (
+              <div className='row orientation' style={{ padding: '1.75%' }}>
+                <div className='col-md-4'>
+                  <label htmlFor='institute'>Institute</label>
+                </div>
+                <div className='col-md-8'>
+                  <input
+                    type='text'
+                    id='institute'
+                    value={institute}
+                    style={{ backgroundColor: '#7f7676', color: 'white' }}
+                    onChange={(e) => setInstitute(e.target.value)}
+                  />
+                </div>
+              </div>
+            )}
 
-          {/* end of single input */}
-          {/* single input */}
-          {!isMember && (
-            <div className='form-control'>
-              <label htmlFor='org'>org</label>
-              <input
-                type='text'
-                id='org'
-                value={org}
-                onChange={(e) => setOrg(e.target.value)}
-              />
-            </div>
-          )}
+            {/* end of single input */}
+            {/* single input */}
+            {!isMember && (
+              <div className='row orientation' style={{ padding: '1.75%' }}>
+                <div className='col-md-4'>
+                  <label htmlFor='org'>Organization</label>
+                </div>
+                <div className='col-md-8'>
+                  <input
+                    type='text'
+                    id='org'
+                    value={org}
+                    style={{ backgroundColor: '#7f7676', color: 'white' }}
+                    onChange={(e) => setOrg(e.target.value)}
+                  />
+                </div>
+              </div>
+            )}
 
-          {/* end of single input */}
-          {/* single input */}
-          {!isMember && (
-            <div className='form-control'>
-              <label htmlFor='bio'>bio</label>
-              <input
-                type='text'
-                id='bio'
-                value={bio}
-                onChange={(e) => setBio(e.target.value)}
-              />
-            </div>
-          )}
+            {/* end of single input */}
+            {/* single input */}
+            {!isMember && (
+              <div className='row orientation' style={{ padding: '1.75%' }}>
+                <div className='col-md-4'>
+                  <label htmlFor='bio'>Bio</label>
+                </div>
+                <div className='col-md-8'>
+                  <input
+                    type='text'
+                    style={{ backgroundColor: '#7f7676', color: 'white' }}
+                    id='bio'
+                    value={bio}
+                    onChange={(e) => setBio(e.target.value)}
+                  />
+                </div>
+              </div>
+            )}
 
-          {/* end of single input */}
-          {/* empty form text */}
-          {isEmpty && (
-            <p className='form-empty'>please fill out all form fields</p>
-          )}
-          {/* submit btn */}
-          {!isEmpty && (
-            <button
-              type='submit'
-              className='btn btn-block btn-primary'
-              onClick={onSubmitRegister}
-            >
-              submit
-            </button>
-          )}
-          {/* skills list */}
+            {/* end of single input */}
+            {/* empty form text */}
+            {isEmpty && (
+              <p className='form-empty'>Please fill out all form fields</p>
+            )}
+            {/* submit btn */}
+            {!isEmpty && (
+              <button
+                type='submit'
+                className='BUTTON_LAI'
+                onClick={onSubmitRegister}
+              >
+                Submit
+              </button>
+            )}
+            {/* skills list */}
 
-          {!isMember && <SkillForm />}
-          {!isMember && <SkillList />}
+            {!isMember && <SkillForm />}
+            {!isMember && <SkillList />}
 
-          {/* register link */}
-          <p className='register-link'>
-            {isMember ? 'need to register' : 'already a member'}
-            <button type='button' onClick={toggleMember}>
-              click here
-            </button>
-          </p>
-        </form>
-      </section>
+            {/* register link */}
+            <p className='register-link'>
+              {isMember ? 'Need to register' : 'Already a member'}
+              <button
+                type='button'
+                className='BUTTON_LAI'
+                onClick={toggleMember}
+              >
+                Click here
+              </button>
+            </p>
+          </form>
+        </section>
+      </div>
     );
   }
   return <Redirect to='/' />;

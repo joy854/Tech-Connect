@@ -23,18 +23,28 @@ export default function Skill({ sid, title }) {
     //   </div>
     // </div>
     <li className='item'>
-      <div className='info'>
-        <span className='title'>{title}</span>
-      </div>
-      <div>
-        <input
-          type='button'
-          value='Delete'
-          className='clear-btn btn btn-primary'
-          aria-label='delete button'
-          onClick={() => handleDelete(sid)}
-        />
-        {/* <MdDelete /> */}
+      <div
+        className='row orientation'
+        style={{ width: '50%', padding: '1%', textAlign: 'left' }}
+      >
+        <div
+          className='col-md-8'
+          style={{ height: '100%', overflow: 'hidden' }}
+        >
+          {/* <div className='title' style={{ paddingTop: '2%' }}> */}
+          {title}
+          {/* </div> */}
+        </div>
+        <div className='col-md-4'>
+          <input
+            type='button'
+            value='Delete'
+            className='BUTTON_LAI'
+            aria-label='delete button'
+            onClick={() => handleDelete(sid)}
+          />
+          {/* <MdDelete /> */}
+        </div>
       </div>
     </li>
   );

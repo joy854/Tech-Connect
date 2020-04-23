@@ -23,15 +23,54 @@ export default function SingleUser() {
     else return false;
   };
 
+  const evalOtherFollow = () => {
+    const isFollow = followers.filter((item) => {
+      if (item.to_id === user.id && item.from_id === parseInt(id)) return item;
+    });
+
+    if (isFollow.length) return true;
+    else return false;
+  };
+
   const [person, setPerson] = React.useState({});
   const [skill, setSkill] = React.useState([]);
   const [follow, setFollow] = React.useState([]);
+  const [msgStatus, setMsgStatus] = React.useState(evalOtherFollow());
+
   const [doesFollow, setDoesFollow] = React.useState(evalDoesFollow());
   const toggleDoesFollow = () => {
     setDoesFollow((prevMember) => {
       let isMember = !prevMember;
       return isMember;
     });
+  };
+
+  const returnBtn = () => {
+    if (user.id === parseInt(id)) return <div></div>;
+    if (doesFollow)
+      return (
+        <button
+          className='btn btn-danger'
+          onClick={() => {
+            unFollowBtn(parseInt(id));
+            toggleDoesFollow();
+          }}
+        >
+          Unfollow
+        </button>
+      );
+    else
+      return (
+        <button
+          className='btn btn-success'
+          onClick={() => {
+            followBtn(parseInt(id));
+            toggleDoesFollow();
+          }}
+        >
+          Follow
+        </button>
+      );
   };
 
   // const person = {
@@ -66,7 +105,7 @@ export default function SingleUser() {
       if (parseInt(id) === item.id) return item;
     });
     setPerson(newUser);
-
+    // console.log(user.id);
     const newSkill = titles.filter((item) => {
       if (parseInt(id) === item.id) return item;
     });
@@ -133,32 +172,14 @@ export default function SingleUser() {
             {person.city},{person.country}{' '}
           </h6>
           {/* {user.id === id ? <h1>:<div></div> }   users are able to follow themselves */}
-          {doesFollow ? (
-            <button
-              className='btn btn-danger'
-              onClick={() => {
-                unFollowBtn(parseInt(id));
-                toggleDoesFollow();
-              }}
-            >
-              Unfollow
-            </button>
-          ) : (
-            <button
-              className='btn btn-success'
-              onClick={() => {
-                followBtn(parseInt(id));
-                toggleDoesFollow();
-              }}
-            >
-              Follow
-            </button>
-          )}
+          {returnBtn()}
           {/* {user.id === id? <h1 />:<div></div>} */}
 
-          <Link to={url} className='btn btn-primary' style={{ margin: '1%' }}>
-            Message
-          </Link>
+          {msgStatus && doesFollow && (
+            <Link to={url} className='btn btn-primary' style={{ margin: '1%' }}>
+              Message
+            </Link>
+          )}
           <br />
         </div>
         <div className='orientation'>

@@ -17,7 +17,7 @@ export default function SingleUserBrief({ user }) {
         </h3>
         <h5>Education: {user.institute}</h5>
         <p>{user.bio}</p>
-        <Link to={url} className='btn btn-primary'>
+        <Link to={url} className='BUTTON_LAI'>
           View Profile
         </Link>
       </div>

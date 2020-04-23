@@ -5,7 +5,7 @@ export default function UserLink() {
   const { user } = React.useContext(UserContext);
   if (user.id) {
     return (
-      <Link to='/users' class='nav-link'>
+      <Link to='/users' class='nav-link BUTTON_LAI '>
         Users
       </Link>
     );

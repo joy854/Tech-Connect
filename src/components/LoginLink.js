@@ -8,7 +8,7 @@ export default function LoginLink() {
   if (user.id) {
     return (
       <button
-        className='btn nav-link'
+        className='nav-link BUTTON_LAI'
         onClick={() => {
           userLogout();
         }}
@@ -18,7 +18,7 @@ export default function LoginLink() {
     );
   }
   return (
-    <Link to='/login' class='nav-link'>
+    <Link to='/login' class='nav-link BUTTON_LAI '>
       Login
     </Link>
   );

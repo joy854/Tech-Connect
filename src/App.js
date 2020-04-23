@@ -9,12 +9,15 @@ import PostForm from './components/PostForm';
 import UserList from './components/UserList';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import ChatForm from './components/ChatForm';
+import Footer from './components/Footer';
+import ScrollBtn from './components/ScrollBtn';
 
 export default function App() {
   return (
     <div>
       <Router>
         <NavBar />
+        <ScrollBtn />
         <Switch>
           <Route exact path='/'>
             <Home />
@@ -45,6 +48,7 @@ export default function App() {
             <Error />
           </Route>
         </Switch>
+        <Footer />
       </Router>
     </div>
   );

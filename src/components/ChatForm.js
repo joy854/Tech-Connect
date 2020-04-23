@@ -42,6 +42,7 @@ export default function ChatForm() {
     <section className='section mid-container'>
       <form>
         <h1>Type your Message Below:</h1>
+        {userDetails.id}
         <div className='form-center'>
           <div className='form-group'>
             {/* <input
@@ -60,7 +61,7 @@ export default function ChatForm() {
               placeholder='Write Something Here....'
               value={chatText}
               onChange={(e) => {
-                // console.log(userDetails);
+                console.log(userDetails);
                 setChatText(e.target.value);
               }}
             ></textarea>
@@ -72,7 +73,7 @@ export default function ChatForm() {
             onClick={() => {
               insertChatByUser(id_to);
               setChatText('');
-              // console.log(userDetails);
+              console.log(userDetails);
               //   console.log(postsOfUser);
               // toggleBtnClick();
             }}

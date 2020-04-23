@@ -12,9 +12,9 @@ export default function NavBar() {
       id='main-nav'
     >
       <div class='container'>
-        <a href='index.html' class='navbar-brand'>
+        <Link to='/' className='navbar-brand'>
           <img src={logo} alt='vintage tech logo' className='logo' />
-        </a>
+        </Link>
         <button
           class='navbar-toggler'
           data-toggle='collapse'
@@ -25,22 +25,22 @@ export default function NavBar() {
         <div class='collapse navbar-collapse' id='navbarCollapse'>
           <ul class='navbar-nav ml-auto'>
             <li class='nav-item'>
-              <Link to='/' class='nav-link'>
+              <Link to='/' className='BUTTON_LAI nav-link'>
                 Home
               </Link>
             </li>
             <li class='nav-item'>
-              <Link to='/about' class='nav-link'>
+              <Link to='/about' className='BUTTON_LAI nav-link'>
                 About
               </Link>
             </li>
-            <li class='nav-item'>
+            <li className='nav-item'>
               <UserLink />
             </li>
-            <li class='nav-item'>
+            <li className='nav-item '>
               <PostLink />
             </li>
-            <li class='nav-item'>
+            <li className='nav-item'>
               <LoginLink />
             </li>
           </ul>

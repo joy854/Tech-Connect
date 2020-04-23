@@ -5,7 +5,7 @@ export default function PostLink() {
   const { user } = React.useContext(UserContext);
   if (user.id) {
     return (
-      <Link to='/posts' class='nav-link'>
+      <Link to='/posts' class='nav-link BUTTON_LAI '>
         Posts
       </Link>
     );

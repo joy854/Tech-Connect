@@ -36,12 +36,20 @@ function UserProvider({ children }) {
   const [userDetails, setUserDetails] = React.useState(
     getUserDetailFromLocalStorage()
   );
-  const [height, setHeight] = React.useState(0);
   const [postsOfUser, setPostsOfUser] = React.useState([]);
   const [visibleComments, setVisibleComments] = React.useState([]);
   const [showComment, setShowComment] = React.useState(false);
   const [allChats, setAllChats] = React.useState([]);
   const [chatText, setChatText] = React.useState('');
+  const [height, setHeight] = React.useState(0);
+
+  React.useEffect(() => {
+    window.addEventListener('scroll', () => {
+      setHeight(window.pageYOffset);
+    });
+    return () => window.removeEventListener('scroll', () => {});
+  });
+
   const toggleShowComment = () => {
     setShowComment((prevMember) => {
       let isMember = !prevMember;
@@ -125,12 +133,6 @@ function UserProvider({ children }) {
   //     return isMember;
   //   });
   // };
-  // React.useEffect(() => {
-  //   window.addEventListener('scroll', () => {
-  //     setHeight(window.pageYOffset);
-  //   });
-  //   return () => window.removeEventListener('scroll', () => {});
-  // });
 
   // const addLike = () => {};
   // const dislike = () => {};
@@ -254,8 +256,6 @@ function UserProvider({ children }) {
       })
       .then((res) => {
         console.log('user', res.data);
-        localStorage.setItem('detail', JSON.stringify(res.data));
-        // setUserDetails(res.data);
         return res.data;
       })
       .catch((error) => console.log(error));
