@@ -73,13 +73,13 @@ export default function PostItem({ element }) {
     };
     setAllLikes([...allLikes, item]);
     setLikeCnt(1 + likeCnt);
-    console.log(allLikes, item, likeCnt);
+    // console.log(allLikes, item, likeCnt);
     // console.log(likeCnt);
     insertLikeByUser(user.id, element.id, element.post_id);
   };
   const unlike = (e) => {
     e.preventDefault();
-    console.log('unlike');
+    // console.log('unlike');
     // console.log(likeCnt);
     setLikeUnlike(false);
     setLikeCnt(likeCnt - 1);
@@ -91,7 +91,7 @@ export default function PostItem({ element }) {
       )
         return item;
     });
-    console.log(arr, likeCnt);
+    // console.log(arr, likeCnt);
     setAllLikes(arr);
     deleteLikeByUser(user.id, element.id, element.post_id);
   };
