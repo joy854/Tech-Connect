@@ -42,6 +42,7 @@ function UserProvider({ children }) {
   const [allChats, setAllChats] = React.useState([]);
   const [chatText, setChatText] = React.useState('');
   const [height, setHeight] = React.useState(0);
+  const [allLikes, setAllLikes] = React.useState([]);
 
   React.useEffect(() => {
     window.addEventListener('scroll', () => {
@@ -55,6 +56,63 @@ function UserProvider({ children }) {
       let isMember = !prevMember;
       return isMember;
     });
+  };
+
+  async function getLikes() {
+    // let userid = user.id;
+
+    const response = await axios
+      .get('http://localhost:3001/getLikes', {})
+      .then((res) => {
+        console.log('likes', res.data);
+        localStorage.setItem('likes', JSON.stringify(res.data));
+        setAllLikes(res.data);
+        return res.data;
+      })
+      .catch((error) => console.log(error));
+    return response;
+  }
+
+  async function insertLike(curr_user_id, post_owner_id, post_id) {
+    const response = await axios
+      .post('http://localhost:3001/insertlike', {
+        curr_user_id,
+        post_owner_id,
+        post_id,
+      })
+      .then((res) => {
+        console.log('insert like', res.data);
+        return res.data;
+      })
+      .catch((error) => console.log(error));
+    return response;
+  }
+  const insertLikeByUser = (curr_user_id, post_owner_id, post_id) => {
+    const item = {
+      curr_user_id,
+      post_owner_id,
+      post_id,
+    };
+    // setAllLikes([item, ...allLikes]);
+    insertLike(curr_user_id, post_owner_id, post_id);
+  };
+
+  async function deleteLike(curr_user_id, post_owner_id, post_id) {
+    const response = await axios
+      .post('http://localhost:3001/deleteLike', {
+        curr_user_id,
+        post_owner_id,
+        post_id,
+      })
+      .then((res) => {
+        console.log('delete like', res.data);
+        return res.data;
+      })
+      .catch((error) => console.log(error));
+    return response;
+  }
+  const deleteLikeByUser = (curr_user_id, post_owner_id, post_id) => {
+    deleteLike(curr_user_id, post_owner_id, post_id);
   };
 
   async function getPosts(userid) {
@@ -284,6 +342,7 @@ function UserProvider({ children }) {
     getPosts(item.id);
     getComments(item.id);
     getChats();
+    getLikes();
     // console.log(item.id, item.username, userDetails);
     // console.log('posts', postsOfUser);
     // console.log('comments', visibleComments);
@@ -338,6 +397,11 @@ function UserProvider({ children }) {
         setChatText,
         insertChatByUser,
         getChats,
+        getLikes,
+        allLikes,
+        setAllLikes,
+        insertLikeByUser,
+        deleteLikeByUser,
         // alert,
         // showAlert,
         // hideAlert,

@@ -15,6 +15,8 @@ export default function PostForm() {
     setPostsOfUser,
     getComments,
     getPosts,
+    getLikes,
+    setAllLikes,
     visibleComments,
     setVisibleComments,
   } = React.useContext(UserContext);
@@ -31,13 +33,21 @@ export default function PostForm() {
       : [];
   }
 
+  function getLikesFromLocalStorage() {
+    return localStorage.getItem('likes')
+      ? JSON.parse(localStorage.getItem('likes'))
+      : [];
+  }
+
   React.useEffect(() => {
-    getPosts(); //will result in error when user signs out
-    getComments();
+    getPosts(user.id); //will result in error when user signs out
+    getLikes();
+    getComments(user.id);
     if (window.performance) {
       if (performance.navigation.type == 1) {
         setPostsOfUser(getPostsDetailFromLocalStorage());
         setVisibleComments(getCommentsDetailFromLocalStorage());
+        setAllLikes(getLikesFromLocalStorage());
         // alert('This page is reloaded');
       }
     }
@@ -112,6 +122,8 @@ export default function PostForm() {
             onClick={() => {
               submitPost();
               console.log(postsOfUser);
+              // localStorage.setItem('posts', JSON.stringify(postsOfUser));
+
               // toggleBtnClick();
             }}
           />
