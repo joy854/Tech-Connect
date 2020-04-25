@@ -101,7 +101,7 @@ export default function PostItem({ element }) {
         <span>
           <button
             onClick={unlike}
-            className='btn-primary'
+            className='BUTTON_LAI'
             style={{ transition: 'transform .3s ease-in' }}
           >
             <FaThumbsUp />
@@ -114,7 +114,7 @@ export default function PostItem({ element }) {
         <span>
           <button
             onClick={like}
-            className='btn-primary'
+            className='BUTTON_LAI'
             style={{ transition: '0.5s' }}
           >
             <FaRegThumbsUp />
@@ -158,25 +158,37 @@ export default function PostItem({ element }) {
         {/* </div> */}
         {/* {likeUnlike ? <span>liked</span> : <FaRegThumbsUp />} */}
         {returnIcon()}
-        <input
-          type='button'
-          value='View Comments'
-          className='btn btn-primary'
-          onClick={toggleShowComment}
-        />
-        {element.id === user.id && (
-          <input
-            type='button'
-            onClick={() => {
-              deletePostForUser(postid);
-              // toggleInsertPostHelper();
-              localStorage.setItem('comments', JSON.stringify(visibleComments));
-            }}
-            value='Delete Post'
-            className='btn btn-danger'
-            style={{ float: 'right' }}
-          />
-        )}
+        <div
+          className='row'
+          style={{ border: 'none', position: 'relative', padding: '0' }}
+        >
+          <div className='col-md-9 col-sm-12' style={{}}>
+            <input
+              type='button'
+              value='View Comments'
+              className='BUTTON_LAI'
+              onClick={toggleShowComment}
+            />
+          </div>
+          <div className='col-md-3 col-sm-12' style={{}}>
+            {element.id === user.id && (
+              <input
+                type='button'
+                onClick={() => {
+                  deletePostForUser(postid);
+                  // toggleInsertPostHelper();
+                  localStorage.setItem(
+                    'comments',
+                    JSON.stringify(visibleComments)
+                  );
+                }}
+                value='Delete Post'
+                className=' BUTTON_NXY'
+                // style={{ position: 'absolute', right: '1%' }}
+              />
+            )}
+          </div>
+        </div>
       </div>
       {showComment && <CommentList post={element} />}
     </div>

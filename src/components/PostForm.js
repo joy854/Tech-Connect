@@ -117,7 +117,7 @@ export default function PostForm() {
           </div>
           <input
             type='button'
-            className='btn btn-primary'
+            className='BUTTON_LAI'
             value='Create Post'
             onClick={() => {
               submitPost();
