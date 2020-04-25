@@ -21,5 +21,5 @@ export default function ChatList({ receiver_id }) {
     // console.log(newArr);
     return arr;
   };
-  return <div>{getreqdChats()}</div>;
+  return <div style={{ overflowWrap: 'break-word' }}>{getreqdChats()}</div>;
 }

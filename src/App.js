@@ -12,12 +12,16 @@ import ChatForm from './components/ChatForm';
 import Footer from './components/Footer';
 import ScrollBtn from './components/ScrollBtn';
 
+import { AlertContext } from './context/alert';
 export default function App() {
+  const { alert } = React.useContext(AlertContext);
   return (
     <div>
       <Router>
         <NavBar />
+
         <ScrollBtn />
+
         <Switch>
           <Route exact path='/'>
             <Home />

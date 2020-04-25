@@ -104,7 +104,8 @@ export default function PostItem({ element }) {
             className='btn-primary'
             style={{ transition: 'transform .3s ease-in' }}
           >
-            <FaThumbsUp /> {likeCnt}{' '}
+            <FaThumbsUp />
+            &nbsp; Liked ({likeCnt}){' '}
           </button>
         </span>
       );
@@ -117,7 +118,7 @@ export default function PostItem({ element }) {
             style={{ transition: '0.5s' }}
           >
             <FaRegThumbsUp />
-            {likeCnt}{' '}
+            &nbsp; Like ({likeCnt}){' '}
           </button>
         </span>
       );
@@ -134,7 +135,7 @@ export default function PostItem({ element }) {
   // }, []);
 
   return (
-    <div className='post-item-container'>
+    <div className='post-item-container' style={{ overflowWrap: 'break-word' }}>
       <div style={{ marginBottom: '0.5rem' }}>
         <div className=''>
           <img

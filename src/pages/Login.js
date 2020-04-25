@@ -5,11 +5,14 @@ import { UserContext } from '../context/user';
 import SkillList from '../components/SkillList';
 import SkillForm from '../components/SkillForm';
 import { SkillContext } from '../context/skills';
+import { AlertContext } from '../context/alert';
+import Alert from '../components/Alert';
 import Home from './Home';
 export default function Login() {
   const history = useHistory();
   // setup user context
-  const { user, userLogin, alert, showAlert } = React.useContext(UserContext);
+  const { user, userLogin } = React.useContext(UserContext);
+  const { alert, handleAlert } = React.useContext(AlertContext);
   const { skill } = React.useContext(SkillContext);
   // state values
   const [email, setEmail] = React.useState('');
@@ -186,8 +189,9 @@ export default function Login() {
       };
       storeSkill(newUser.id);
       userLogin(newUser);
+      handleAlert({ type: 'success', text: 'Logged in!' });
     } else {
-      // alert
+      handleAlert({ type: 'danger', text: 'Some error occured!' });
     }
     //     }
     //   .then((response) => response.json())
@@ -421,6 +425,9 @@ export default function Login() {
             {isEmpty && (
               <p className='form-empty'>Please fill out all form fields</p>
             )}
+
+            {alert.show && <Alert type={alert.type} text={alert.text} />}
+            <Alert />
             {/* submit btn */}
             {!isEmpty && (
               <button
