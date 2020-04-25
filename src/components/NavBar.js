@@ -5,6 +5,7 @@ import UserLink from './UserLink';
 // import { UserContext } from "../context/user";
 import PostLink from './PostLink';
 import LoginLink from './LoginLink';
+import SignedInUserLink from './SignedInUserLink';
 export default function NavBar() {
   return (
     <nav
@@ -39,6 +40,9 @@ export default function NavBar() {
             </li>
             <li className='nav-item '>
               <PostLink />
+            </li>
+            <li className='nav-item'>
+              <SignedInUserLink />
             </li>
             <li className='nav-item'>
               <LoginLink />

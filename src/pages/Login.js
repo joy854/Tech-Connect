@@ -19,6 +19,7 @@ export default function Login() {
   const [fName, setFName] = React.useState('');
   const [lName, setLName] = React.useState('');
   const [bio, setBio] = React.useState('');
+  const [image, setImage] = React.useState('');
   // const [singleSkill, setSingleSkill] = React.useState('');
   // const [skill, setSkill] = React.useState([]);
   const [city, setCity] = React.useState('');
@@ -124,6 +125,7 @@ export default function Login() {
         password,
         username,
         institute,
+        image,
         org,
         city,
         country,
@@ -167,6 +169,11 @@ export default function Login() {
 
   const onSubmitRegister = async (e) => {
     e.preventDefault();
+    console.log(image);
+    if (!image)
+      setImage(
+        'https://png.pngtree.com/png-vector/20190411/ourmid/pngtree-business-male-icon-vector-png-image_916468.jpg'
+      );
     // console.log('hi');
     let response;
     if (!isMember) response = await registerUser();
@@ -349,6 +356,61 @@ export default function Login() {
                     id='bio'
                     value={bio}
                     onChange={(e) => setBio(e.target.value)}
+                  />
+                </div>
+              </div>
+            )}
+            {/* end of single input */}
+            {/* single input */}
+            {!isMember && (
+              <div className='row orientation' style={{ padding: '1.75%' }}>
+                <div className='col-md-4'>
+                  <label htmlFor='city'>City</label>
+                </div>
+                <div className='col-md-8'>
+                  <input
+                    type='text'
+                    style={{ backgroundColor: '#7f7676', color: 'white' }}
+                    id='city'
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
+                  />
+                </div>
+              </div>
+            )}
+            {/* end of single input */}
+            {/* single input */}
+            {!isMember && (
+              <div className='row orientation' style={{ padding: '1.75%' }}>
+                <div className='col-md-4'>
+                  <label htmlFor='country'>Country</label>
+                </div>
+                <div className='col-md-8'>
+                  <input
+                    type='text'
+                    style={{ backgroundColor: '#7f7676', color: 'white' }}
+                    id='country'
+                    value={country}
+                    onChange={(e) => setCountry(e.target.value)}
+                  />
+                </div>
+              </div>
+            )}
+
+            {/* end of single input */}
+            {/* single input */}
+            {!isMember && (
+              <div className='row orientation' style={{ padding: '1.75%' }}>
+                <div className='col-md-4'>
+                  <label htmlFor='image'>Image</label>
+                </div>
+                <div className='col-md-8'>
+                  <input
+                    type='text'
+                    style={{ backgroundColor: '#7f7676', color: 'white' }}
+                    id='image'
+                    value={image}
+                    onChange={(e) => setImage(e.target.value)}
                   />
                 </div>
               </div>

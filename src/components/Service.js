@@ -9,9 +9,8 @@ export default function Service() {
           <div class='col text-center py-5'>
             <h1 class='display-4'>Explore</h1>
             <p class='lead'>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sapiente
-              doloribus ut iure itaque quibusdam rem accusantium deserunt
-              reprehenderit sunt minus.
+              Have a doubt in a complex algorithmic problem? Looking for a job?
+              Don't worry! We have got it all covered.
             </p>
             <a href='#' class='btn btn-outline-secondary'>
               Find Out More

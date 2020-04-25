@@ -99,7 +99,11 @@ export default function PostItem({ element }) {
     if (likeUnlike)
       return (
         <span>
-          <button onClick={unlike} className='btn-primary'>
+          <button
+            onClick={unlike}
+            className='btn-primary'
+            style={{ transition: 'transform .3s ease-in' }}
+          >
             <FaThumbsUp /> {likeCnt}{' '}
           </button>
         </span>
@@ -107,7 +111,11 @@ export default function PostItem({ element }) {
     else
       return (
         <span>
-          <button onClick={like} className='btn-primary'>
+          <button
+            onClick={like}
+            className='btn-primary'
+            style={{ transition: '0.5s' }}
+          >
             <FaRegThumbsUp />
             {likeCnt}{' '}
           </button>
