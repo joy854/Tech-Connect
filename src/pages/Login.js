@@ -76,7 +76,7 @@ export default function Login() {
   const storeSkill = (id) => {
     skill.map((item) => {
       const newItem = item.title;
-      fetch('http://localhost:3001/storeSkill', {
+      fetch('https://fathomless-lowlands-21919.herokuapp.com/storeSkill', {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -120,23 +120,26 @@ export default function Login() {
   //   console.log('reg', user.id);
   // };
   const registerUser = async (e) => {
-    let response = await fetch('http://localhost:3001/register', {
-      method: 'post',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        email,
-        password,
-        username,
-        institute,
-        image,
-        org,
-        city,
-        country,
-        fName,
-        lName,
-        bio,
-      }),
-    })
+    let response = await fetch(
+      'https://fathomless-lowlands-21919.herokuapp.com/register',
+      {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email,
+          password,
+          username,
+          institute,
+          image,
+          org,
+          city,
+          country,
+          fName,
+          lName,
+          bio,
+        }),
+      }
+    )
       .then((newUser) => newUser.json())
       .then((item) => {
         const obj = {
@@ -150,14 +153,17 @@ export default function Login() {
   };
 
   const loginUser = async (e) => {
-    let response = await fetch('http://localhost:3001/signin', {
-      method: 'post',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    })
+    let response = await fetch(
+      'https://fathomless-lowlands-21919.herokuapp.com/signin',
+      {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      }
+    )
       .then((newUser) => newUser.json())
       .then((item) => {
         const obj = {

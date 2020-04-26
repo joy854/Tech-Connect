@@ -52,7 +52,7 @@ function PostProvider({ children }) {
       return;
     }
     const response = await axios
-      .post('http://localhost:3001/insertPost', {
+      .post('https://fathomless-lowlands-21919.herokuapp.com/insertPost', {
         id,
         text,
         url,
@@ -93,7 +93,7 @@ function PostProvider({ children }) {
     }
 
     const response = await axios
-      .post('http://localhost:3001/deletePost', {
+      .post('https://fathomless-lowlands-21919.herokuapp.com/deletePost', {
         id,
         postid,
       })

@@ -46,7 +46,7 @@ function UsersProvider({ children }) {
     let from_id = user.id,
       to_id = id;
     const response = await axios
-      .post('http://localhost:3001/insertFollowers', {
+      .post('https://fathomless-lowlands-21919.herokuapp.com/insertFollowers', {
         from_id,
         to_id,
       })
@@ -58,7 +58,7 @@ function UsersProvider({ children }) {
     let from_id = user.id,
       to_id = id;
     const response = await axios
-      .post('http://localhost:3001/deleteFollowers', {
+      .post('https://fathomless-lowlands-21919.herokuapp.com/deleteFollowers', {
         from_id,
         to_id,
       })
@@ -96,7 +96,7 @@ function UsersProvider({ children }) {
 
   async function getAllUser() {
     const response = await axios
-      .get('http://localhost:3001/users')
+      .get('https://fathomless-lowlands-21919.herokuapp.com/users')
       .then((res) => {
         // console.log(res.data);
         setUsers(res.data);
@@ -117,7 +117,7 @@ function UsersProvider({ children }) {
 
   async function getAllTitle() {
     const response = await axios
-      .get('http://localhost:3001/getSkills')
+      .get('https://fathomless-lowlands-21919.herokuapp.com/getSkills')
       .then((res) => {
         // console.log(res.data);
         setTitles(res.data);
@@ -130,7 +130,7 @@ function UsersProvider({ children }) {
 
   async function getAllFollower() {
     const response = await axios
-      .get('http://localhost:3001/getFollowers')
+      .get('https://fathomless-lowlands-21919.herokuapp.com/getFollowers')
       .then((res) => {
         // console.log(res.data);
         setFollowers(res.data);
