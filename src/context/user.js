@@ -62,7 +62,7 @@ function UserProvider({ children }) {
     // let userid = user.id;
 
     const response = await axios
-      .get('https://fathomless-lowlands-21919.herokuapp.com/getLikes', {})
+      .get('https://guarded-woodland-97115.herokuapp.com/getLikes', {})
       .then((res) => {
         console.log('likes', res.data);
         localStorage.setItem('likes', JSON.stringify(res.data));
@@ -75,7 +75,7 @@ function UserProvider({ children }) {
 
   async function insertLike(curr_user_id, post_owner_id, post_id) {
     const response = await axios
-      .post('https://fathomless-lowlands-21919.herokuapp.com/insertlike', {
+      .post('https://guarded-woodland-97115.herokuapp.com/insertlike', {
         curr_user_id,
         post_owner_id,
         post_id,
@@ -99,7 +99,7 @@ function UserProvider({ children }) {
 
   async function deleteLike(curr_user_id, post_owner_id, post_id) {
     const response = await axios
-      .post('https://fathomless-lowlands-21919.herokuapp.com/deleteLike', {
+      .post('https://guarded-woodland-97115.herokuapp.com/deleteLike', {
         curr_user_id,
         post_owner_id,
         post_id,
@@ -122,7 +122,7 @@ function UserProvider({ children }) {
       return;
     }
     const response = await axios
-      .post('https://fathomless-lowlands-21919.herokuapp.com/getPosts', {
+      .post('https://guarded-woodland-97115.herokuapp.com/getPosts', {
         userid,
       })
       .then((res) => {
@@ -142,7 +142,7 @@ function UserProvider({ children }) {
       return;
     }
     const response = await axios
-      .post('https://fathomless-lowlands-21919.herokuapp.com/getComments', {
+      .post('https://guarded-woodland-97115.herokuapp.com/getComments', {
         userid,
       })
       .then((res) => {
@@ -157,7 +157,7 @@ function UserProvider({ children }) {
 
   async function getDetails(userid) {
     const response = await axios
-      .post('https://fathomless-lowlands-21919.herokuapp.com/getDetails', {
+      .post('https://guarded-woodland-97115.herokuapp.com/getDetails', {
         userid,
       })
       .then((res) => {
@@ -173,7 +173,7 @@ function UserProvider({ children }) {
   async function getChats() {
     // let userid = user.id;
     const response = await axios
-      .get('https://fathomless-lowlands-21919.herokuapp.com/getChats', {})
+      .get('https://guarded-woodland-97115.herokuapp.com/getChats', {})
       .then((res) => {
         localStorage.setItem('chats', JSON.stringify(res.data));
         setAllChats(res.data);
@@ -202,7 +202,7 @@ function UserProvider({ children }) {
       return;
     }
     const response = await axios
-      .post('https://fathomless-lowlands-21919.herokuapp.com/deleteComment', {
+      .post('https://guarded-woodland-97115.herokuapp.com/deleteComment', {
         id,
         comment_id,
         post_id,
@@ -245,7 +245,7 @@ function UserProvider({ children }) {
       return;
     }
     const response = await axios
-      .post('https://fathomless-lowlands-21919.herokuapp.com/insertComment', {
+      .post('https://guarded-woodland-97115.herokuapp.com/insertComment', {
         username,
         fname,
         lname,
@@ -302,7 +302,7 @@ function UserProvider({ children }) {
 
   async function insertChat(userid, newId) {
     const response = await axios
-      .post('https://fathomless-lowlands-21919.herokuapp.com/insertChat', {
+      .post('https://guarded-woodland-97115.herokuapp.com/insertChat', {
         id_from: userDetails.id,
         id_to: userid,
         chat_id: newId,

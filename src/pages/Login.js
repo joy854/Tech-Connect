@@ -76,7 +76,7 @@ export default function Login() {
   const storeSkill = (id) => {
     skill.map((item) => {
       const newItem = item.title;
-      fetch('https://fathomless-lowlands-21919.herokuapp.com/storeSkill', {
+      fetch('https://guarded-woodland-97115.herokuapp.com/storeSkill', {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -121,7 +121,7 @@ export default function Login() {
   // };
   const registerUser = async (e) => {
     let response = await fetch(
-      'https://fathomless-lowlands-21919.herokuapp.com/register',
+      'https://guarded-woodland-97115.herokuapp.com/register',
       {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
@@ -154,7 +154,7 @@ export default function Login() {
 
   const loginUser = async (e) => {
     let response = await fetch(
-      'https://fathomless-lowlands-21919.herokuapp.com/signin',
+      'https://guarded-woodland-97115.herokuapp.com/signin',
       {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
