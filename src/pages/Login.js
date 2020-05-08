@@ -177,7 +177,7 @@ export default function Login() {
   };
 
   const onSubmitRegister = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     console.log(image);
     if (!image)
       setImage(
