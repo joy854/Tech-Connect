@@ -120,6 +120,10 @@ export default function Login() {
   //   console.log('reg', user.id);
   // };
   const registerUser = async (e) => {
+    let img = image;
+    if (!img)
+      img =
+        'https://www.pikpng.com/pngl/m/74-748374_laptop-user-personal-computer-computer-icons-computer-user.png';
     let response = await fetch(
       'https://guarded-woodland-97115.herokuapp.com/register',
       {
@@ -130,7 +134,7 @@ export default function Login() {
           password,
           username,
           institute,
-          image,
+          image: img,
           org,
           city,
           country,
