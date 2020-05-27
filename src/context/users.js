@@ -156,7 +156,7 @@ function UsersProvider({ children }) {
     const response = getAllUser();
     getAllTitle();
     getAllFollower();
-    // console.log(followers);
+    console.log(followers);
     // setUsers(response);
     // users.map((item) => console.log(item.fname));
     // console.log(users);

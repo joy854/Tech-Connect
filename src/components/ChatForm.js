@@ -42,7 +42,7 @@ export default function ChatForm() {
     <section className='section mid-container'>
       <form>
         <h1>Type your Message Below:</h1>
-        {userDetails.id}
+
         <div className='form-center'>
           <div className='form-group'>
             {/* <input
@@ -68,7 +68,7 @@ export default function ChatForm() {
           </div>
           <input
             type='button' //all chats lost on submitting :(
-            className='btn btn-primary'
+            className='BUTTON_LAI'
             value='Send Message'
             onClick={() => {
               insertChatByUser(id_to);

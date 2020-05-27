@@ -133,7 +133,7 @@ export default function PostItem({ element }) {
   //     }
   //   }
   // }, []);
-
+  console.log('POstitem');
   return (
     <div className='post-item-container' style={{ overflowWrap: 'break-word' }}>
       <div style={{ marginBottom: '0.5rem' }}>

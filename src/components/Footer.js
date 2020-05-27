@@ -37,16 +37,30 @@ export default function Footer() {
         </div>
       </footer>
 
-      <div class='modal fade text-dark' id='contactModal'>
+      <div
+        class='modal fade text-dark'
+        id='contactModal'
+        // style={{ backgroundColor: '#333333' }}
+      >
         <div class='modal-dialog'>
           <div class='modal-content'>
-            <div class='modal-header'>
+            <div
+              class='modal-header'
+              style={{ backgroundColor: '#333333', color: 'white' }}
+            >
               <h5 class='modal-title'>Contact Us</h5>
-              <button class='close' data-dismiss='modal'>
+              <button
+                class='close'
+                data-dismiss='modal'
+                style={{ color: 'white' }}
+              >
                 <span>&times;</span>
               </button>
             </div>
-            <div class='modal-body'>
+            <div
+              class='modal-body'
+              style={{ backgroundColor: '#333333', color: 'white' }}
+            >
               <form>
                 <div class='form-group'>
                   <label for='name'>Name</label>
@@ -62,8 +76,8 @@ export default function Footer() {
                 </div>
               </form>
             </div>
-            <div class='modal-footer'>
-              <button class='btn btn-primary btn-block'>Submit</button>
+            <div class='modal-footer' style={{ backgroundColor: '#333333' }}>
+              <button class='btn-block BUTTON_LAI'>Submit</button>
             </div>
           </div>
         </div>

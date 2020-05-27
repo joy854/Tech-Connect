@@ -4,6 +4,8 @@ import PostList from './PostList';
 import { Redirect } from 'react-router-dom';
 import { PostContext } from '../context/post';
 import { UserContext } from '../context/user';
+import { UsersContext } from '../context/users';
+
 import Error from '../pages/Error';
 export default function PostForm() {
   const { text, url, setText, setUrl, submitPost } = React.useContext(
@@ -20,6 +22,8 @@ export default function PostForm() {
     visibleComments,
     setVisibleComments,
   } = React.useContext(UserContext);
+
+  const { followers } = React.useContext(UsersContext);
 
   function getCommentsDetailFromLocalStorage() {
     return localStorage.getItem('comments')
@@ -53,7 +57,7 @@ export default function PostForm() {
     }
     console.log('posts', postsOfUser);
     // console.log('comments', visibleComments);
-  }, []);
+  }, [followers]);
 
   // const [btnClick, setBtnClick] = React.useState(false);
 

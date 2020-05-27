@@ -177,41 +177,44 @@ export default function Login() {
   };
 
   const onSubmitRegister = async (e) => {
-    // e.preventDefault();
+    e.preventDefault();
     console.log(image);
     if (!image)
       setImage(
-        'https://png.pngtree.com/png-vector/20190411/ourmid/pngtree-business-male-icon-vector-png-image_916468.jpg'
+        'https://www.pikpng.com/pngl/m/74-748374_laptop-user-personal-computer-computer-icons-computer-user.png'
       );
     // console.log('hi');
     let response;
-    if (!isMember) response = await registerUser();
-    else response = await loginUser();
-    // console.log(response);
-    if (response.id) {
-      const newUser = {
-        username,
-        id: response.id,
-      };
-      storeSkill(newUser.id);
-      userLogin(newUser);
-      handleAlert({ type: 'success', text: 'Logged in!' });
+    if (!isMember) {
+      response = await registerUser();
+      if (response.id) {
+        const newUser = {
+          username,
+          id: response.id,
+        };
+        storeSkill(newUser.id);
+        handleAlert({ type: 'success', text: 'Succesfully Registered!' });
+        // userLogin(newUser);
+        // return <Redirect to='/' />;
+        window.location.replace('http://localhost:3000/');
+      } else {
+        handleAlert({ type: 'danger', text: 'Some error occured!' });
+      }
     } else {
-      handleAlert({ type: 'danger', text: 'Some error occured!' });
+      response = await loginUser();
+      if (response.id) {
+        const newUser = {
+          username,
+          id: response.id,
+        };
+        userLogin(newUser);
+        handleAlert({ type: 'success', text: 'Logged in!' });
+      } else {
+        handleAlert({ type: 'danger', text: 'Some error occured!' });
+      }
     }
-    //     }
-    //   .then((response) => response.json())
-    //   .then((per) => {
-    //     const obj = {
-    //       username: per.username,
-    //       id: per.id,
-    //     };
-    //     if (per.id) {
-    //       storeSkill(per.id);
-    //       userLogin(obj);
-    //     }
-    //   });
-    // console.log('reg', user.id);
+    // console.log(response);
+    // window.location.replace('http://localhost:3000/');
   };
   // React.useEffect(() => {
   //   if (user.id) return <Redirect to='/' />;
@@ -220,6 +223,14 @@ export default function Login() {
   //   if (!user.id) return <Redirect to='/home' />;
   //   else return <Error />;
   //   console.log('check', user.id);
+  // };
+
+  // const toggleLoad = () => {
+  //   // setToggleLoad((prevMember) => {
+  //   //   let isMember = !prevMember;
+  //   //   return isMember;
+  //   // });
+  //   window.location.replace('http://localhost:3000/');
   // };
   if (!user.id) {
     return (
@@ -466,4 +477,7 @@ export default function Login() {
     );
   }
   return <Redirect to='/' />;
+  // return toggleLoad();
+
+  // else toggleLoad();
 }
