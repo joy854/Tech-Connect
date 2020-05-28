@@ -140,9 +140,19 @@ function PostProvider({ children }) {
       owner_id,
       post_id,
     };
+    // console.log(showComments);
+    // const newArr = showComments.filter((item) => {
+    //   if (item.owner_id === owner_id && item.post_id === post_id) return item;
+    // });
     setShowComments([...showComments, newUser]);
   };
-  const hideCmnt = (owner_id, post_id) => {};
+  const hideCmnt = (owner_id, post_id) => {
+    const newCmnt = showComments.filter((item) => {
+      if (!(item.owner_id === owner_id && item.post_id === post_id))
+        return item;
+    });
+    setShowComments(newCmnt);
+  };
 
   return (
     <PostContext.Provider

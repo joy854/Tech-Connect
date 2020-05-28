@@ -171,19 +171,28 @@ export default function PostItem({ element }) {
   //   setCmnt(false);
   //   // setShowComments(showComments);
   // };
+  const getStatus = () => {
+    const chckArr = showComments.filter((item) => {
+      if (item.owner_id === element.id && item.post_id === element.post_id)
+        return item;
+    });
+    if (chckArr.length) return true;
+    return false;
+  };
+  const [cmntStatus, setCmntStatus] = React.useState(getStatus());
 
   const showHideCmnt = () => {
     // console.log(cmnt);
-    if (cmnt === false) {
+    if (!cmntStatus) {
       return (
         <input
           type='button'
           value='View Comments'
           className='BUTTON_LAI'
           onClick={() => {
-            // setCmnt(true);
-            // showCmnt(element.id, element.post_id);
-            console.log('show');
+            setCmntStatus(true);
+            showCmnt(element.id, element.post_id);
+            // console.log('show');
           }}
         />
       );
@@ -194,9 +203,9 @@ export default function PostItem({ element }) {
           value='Hide Comments'
           className='BUTTON_LAI'
           onClick={() => {
-            // hideCmnt(element.id, element.post_id);
-            console.log('hide');
-            // setCmnt(false);
+            setCmntStatus(false);
+            hideCmnt(element.id, element.post_id);
+            // console.log('hide');
           }}
         />
       );
