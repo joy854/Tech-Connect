@@ -6,13 +6,17 @@ import CommentItem from './CommentItem';
 import CommentList from './CommentList';
 import { FaThumbsUp, FaRegThumbsUp } from 'react-icons/fa';
 
+// function getShowCommentsFromLocalStorage() {
+//   return localStorage.getItem('showcomment')
+//     ? JSON.parse(localStorage.getItem('showcomment'))
+//     : false;
+// }
+
 export default function PostItem({ element }) {
   //   const { user, toggleInsertPostHelper } = React.useContext(UserContext);
   const {
     user,
     visibleComments,
-    showComment,
-    toggleShowComment,
     allLikes,
     setAllLikes,
     insertLikeByUser,
@@ -20,7 +24,12 @@ export default function PostItem({ element }) {
     getLikes,
   } = React.useContext(UserContext);
 
-  const { deletePostForUser } = React.useContext(PostContext);
+  const {
+    deletePostForUser,
+    showComments,
+    showCmnt,
+    hideCmnt,
+  } = React.useContext(PostContext);
 
   const likeState = () => {
     // console.log(allLikes);
@@ -51,8 +60,21 @@ export default function PostItem({ element }) {
   };
   const [likeUnlike, setLikeUnlike] = React.useState(likeState());
   const [likeCnt, setLikeCnt] = React.useState(entryCnt());
+  // const [showComment, setShowComment] = React.useState(
+  //   getShowCommentsFromLocalStorage()
+  // );
 
   const postid = element.post_id;
+
+  // const toggleShowComment = () => {
+  //   console.log(showComment);
+  //   setShowComment((prevMember) => {
+  //     let isMember = !prevMember;
+  //     return isMember;
+  //   });
+  //   // localStorage.setItem('showcomment', JSON.stringify(!showComment));
+  // };
+
   const urlOfPost = () => {
     if (element.post_url)
       return (
@@ -133,63 +155,126 @@ export default function PostItem({ element }) {
   //     }
   //   }
   // }, []);
-  return (
-    <div className='post-item-container' style={{ overflowWrap: 'break-word' }}>
-      <div style={{ marginBottom: '0.5rem' }}>
-        <div className=''>
-          <img
-            src={element.image_url}
-            alt='No Profile Picture'
-            className='img-profile-post'
-          />
-          &nbsp;&nbsp;&nbsp;
-          <span>
-            {element.fname} {element.lname}
-          </span>
-        </div>
-        {/* <div> */}
-        {urlOfPost()}
 
-        <p>{element.content}</p>
-        {/* <Link to={url} className='btn btn-primary'>
+  const [cmnt, setCmnt] = React.useState(false);
+
+  // const showCmnt = () => {
+  //   const newUser = {
+  //     owner_id: element.id,
+  //     post_id: element.post_id,
+  //   };
+  //   setCmnt(true);
+  //   // [...showComments, newUser]
+  //   setShowComments(showComments);
+  // };
+  // const hideCmnt = (owner_id, post_id) => {
+  //   setCmnt(false);
+  //   // setShowComments(showComments);
+  // };
+
+  const showHideCmnt = () => {
+    // console.log(cmnt);
+    if (cmnt === false) {
+      return (
+        <input
+          type='button'
+          value='View Comments'
+          className='BUTTON_LAI'
+          onClick={() => {
+            // setCmnt(true);
+            // showCmnt(element.id, element.post_id);
+            console.log('show');
+          }}
+        />
+      );
+    } else {
+      return (
+        <input
+          type='button'
+          value='Hide Comments'
+          className='BUTTON_LAI'
+          onClick={() => {
+            // hideCmnt(element.id, element.post_id);
+            console.log('hide');
+            // setCmnt(false);
+          }}
+        />
+      );
+    }
+  };
+
+  const checkComment = () => {
+    const chckArr = showComments.filter((item) => {
+      if (item.owner_id === element.id && item.post_id === element.post_id)
+        return item;
+    });
+    // console.log(chckArr, showComments); //if there are 2 posts then 2 chckarr will be printed 1 for each post
+    if (chckArr.length) {
+      // setCmnt(true);
+      return <CommentList post={element} />;
+    } else {
+      // setCmnt(false);
+      return <div></div>;
+    }
+  };
+
+  return (
+    <div>
+      <div
+        className='post-item-container'
+        style={{ overflowWrap: 'break-word' }}
+      >
+        <div style={{ marginBottom: '0.5rem' }}>
+          <div className=''>
+            <img
+              src={element.image_url}
+              alt='No Profile Picture'
+              className='img-profile-post'
+            />
+            &nbsp;&nbsp;&nbsp;
+            <span>
+              {element.fname} {element.lname}
+            </span>
+          </div>
+          {/* <div> */}
+          {urlOfPost()}
+
+          <p>{element.content}</p>
+          {/* <Link to={url} className='btn btn-primary'>
           View Profile
         </Link> */}
-        {/* </div> */}
-        {/* {likeUnlike ? <span>liked</span> : <FaRegThumbsUp />} */}
-        {returnIcon()}
-        <div
-          className='row'
-          style={{ border: 'none', position: 'relative', padding: '0' }}
-        >
-          <div className='col-md-9 col-sm-12' style={{}}>
-            <input
-              type='button'
-              value='View Comments'
-              className='BUTTON_LAI'
-              onClick={toggleShowComment}
-            />
-          </div>
-          <div className='col-md-3 col-sm-12' style={{}}>
-            {element.id === user.id && (
-              <input
-                type='button'
-                onClick={() => {
-                  deletePostForUser(postid);
-                  // toggleInsertPostHelper();
-                  localStorage.setItem(
-                    'comments',
-                    JSON.stringify(visibleComments)
-                  );
-                }}
-                value='Delete Post'
-                className=' BUTTON_NXY'
-                // style={{ position: 'absolute', right: '1%' }}
-              />
-            )}
+          {/* </div> */}
+          {/* {likeUnlike ? <span>liked</span> : <FaRegThumbsUp />} */}
+          {returnIcon()}
+          <div
+            className='row'
+            style={{ border: 'none', position: 'relative', padding: '0' }}
+          >
+            <div className='col-md-9 col-sm-12' style={{}}>
+              {showHideCmnt()}
+            </div>
+            <div className='col-md-3 col-sm-12' style={{}}>
+              {element.id === user.id && (
+                <input
+                  type='button'
+                  onClick={() => {
+                    deletePostForUser(postid);
+                    // toggleInsertPostHelper();
+                    // localStorage.setItem(
+                    //   'comments',
+                    //   JSON.stringify(visibleComments)
+                    // );
+                  }}
+                  value='Delete Post'
+                  className=' BUTTON_NXY'
+                  // style={{ position: 'absolute', right: '1%' }}
+                />
+              )}
+            </div>
           </div>
         </div>
       </div>
-      {showComment && <CommentList post={element} />}
+      {checkComment()}
     </div>
   );
 }

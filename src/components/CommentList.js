@@ -6,20 +6,21 @@ export default function CommentList({ post }) {
   const { userDetails, visibleComments, addCommentForUser } = React.useContext(
     UserContext
   );
-
+  // console.log(post);
   const returnComments = () => {
     const newList = visibleComments.filter((item) => {
       if (item.id === post.id && item.post_id === post.post_id) return item;
     });
     if (!newList.length) return <div>Empty</div>;
     const arr = newList.map((item) => {
-      console.log(item);
+      // console.log(item);
       return <CommentItem key={uuid()} element={item} />;
     });
     return arr;
   };
 
   const [inputText, setInputText] = React.useState('');
+
   return (
     <div className=''>
       <div class='row'>

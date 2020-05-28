@@ -38,7 +38,6 @@ function UserProvider({ children }) {
   );
   const [postsOfUser, setPostsOfUser] = React.useState([]);
   const [visibleComments, setVisibleComments] = React.useState([]);
-  const [showComment, setShowComment] = React.useState(false);
   const [allChats, setAllChats] = React.useState([]);
   const [chatText, setChatText] = React.useState('');
   const [height, setHeight] = React.useState(0);
@@ -50,13 +49,6 @@ function UserProvider({ children }) {
     });
     return () => window.removeEventListener('scroll', () => {});
   });
-
-  const toggleShowComment = () => {
-    setShowComment((prevMember) => {
-      let isMember = !prevMember;
-      return isMember;
-    });
-  };
 
   async function getLikes() {
     // let userid = user.id;
@@ -389,8 +381,6 @@ function UserProvider({ children }) {
         getPosts,
         delCommentForUser,
         addCommentForUser,
-        showComment,
-        toggleShowComment,
         allChats,
         setAllChats,
         chatText,

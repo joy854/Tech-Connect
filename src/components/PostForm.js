@@ -48,7 +48,7 @@ export default function PostForm() {
     getLikes();
     getComments(user.id);
     if (window.performance) {
-      if (performance.navigation.type == 1) {
+      if (performance.navigation.type === 1) {
         setPostsOfUser(getPostsDetailFromLocalStorage());
         setVisibleComments(getCommentsDetailFromLocalStorage());
         setAllLikes(getLikesFromLocalStorage());
@@ -57,7 +57,7 @@ export default function PostForm() {
     }
     console.log('posts', postsOfUser);
     // console.log('comments', visibleComments);
-  }, [followers]);
+  }, [followers, user.id]);
 
   // const [btnClick, setBtnClick] = React.useState(false);
 

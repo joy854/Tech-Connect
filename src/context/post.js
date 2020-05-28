@@ -133,11 +133,24 @@ function PostProvider({ children }) {
   // }, [user.id]);
 
   //   if (!user.id) return <Redirect to='/' />;
+
+  const [showComments, setShowComments] = React.useState([]);
+  const showCmnt = (owner_id, post_id) => {
+    const newUser = {
+      owner_id,
+      post_id,
+    };
+    setShowComments([...showComments, newUser]);
+  };
+  const hideCmnt = (owner_id, post_id) => {};
+
   return (
     <PostContext.Provider
       value={{
         text,
-
+        showComments,
+        showCmnt,
+        hideCmnt,
         setText,
         url,
         setUrl,
