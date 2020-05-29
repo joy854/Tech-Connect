@@ -7,7 +7,7 @@ import SingleUser from './pages/SingleUser';
 import NavBar from './components/NavBar';
 import PostForm from './components/PostForm';
 import UserList from './components/UserList';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 import ChatForm from './components/ChatForm';
 import Footer from './components/Footer';
 import ScrollBtn from './components/ScrollBtn';
@@ -23,29 +23,29 @@ export default function App() {
         <ScrollBtn />
 
         <Switch>
-          <Route exact path='http://angry-shape.surge.sh/'>
+          <Route exact path='/'>
             <Home />
           </Route>
-          <Route exact path='http://angry-shape.surge.sh/about'>
+          <Route exact path='/about'>
             <About />
           </Route>
-          <Route exact path='http://angry-shape.surge.sh/posts'>
+          <Route exact path='/posts'>
             <PostForm />
           </Route>
-          <Route exact path='http://angry-shape.surge.sh/users'>
+          <Route exact path='/users'>
             <UserList />
           </Route>
-          <Route exact path='http://angry-shape.surge.sh/login'>
+          <Route exact path='/login'>
             <Login />
           </Route>
           <Route
             exact
-            path='http://angry-shape.surge.sh/chats/:id_to'
+            path='/chats/:id_to'
             children={<ChatForm></ChatForm>}
           ></Route>
           <Route
             exact
-            path='http://angry-shape.surge.sh/users/:id'
+            path='/users/:id'
             children={<SingleUser></SingleUser>}
           ></Route>
           <Route path='*'>

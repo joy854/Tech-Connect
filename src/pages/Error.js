@@ -6,7 +6,7 @@ export default function Error() {
     <section className='error-page section'>
       <div className='error-container'>
         <h1>oops! it's a dead end</h1>
-        <Link to='http://angry-shape.surge.sh/' className='BUTTON_LAI'>
+        <Link to='/' className='BUTTON_LAI'>
           back home
         </Link>
       </div>
