@@ -21,7 +21,7 @@ export default function App() {
   return (
     <div>
       <Hero>
-        <Link to='/login' className='BUTTON_LAI'>
+        <Link to='http://angry-shape.surge.sh/login' className='BUTTON_LAI'>
           {user.id && <span>Welcome!</span>}
           {!user.id && <span>Lets's Begin!</span>}
         </Link>

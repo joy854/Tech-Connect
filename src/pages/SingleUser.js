@@ -12,7 +12,7 @@ export default function SingleUser() {
   const { users, titles, followers, followBtn, unFollowBtn } = React.useContext(
     UsersContext
   );
-  const url = `/chats/${parseInt(id)}`;
+  const url = `http://angry-shape.surge.sh/chats/${parseInt(id)}`;
 
   const evalDoesFollow = () => {
     const isFollow = followers.filter((item) => {

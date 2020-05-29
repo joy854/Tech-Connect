@@ -23,29 +23,29 @@ export default function App() {
         <ScrollBtn />
 
         <Switch>
-          <Route exact path='/'>
+          <Route exact path='http://angry-shape.surge.sh/'>
             <Home />
           </Route>
-          <Route exact path='/about'>
+          <Route exact path='http://angry-shape.surge.sh/about'>
             <About />
           </Route>
-          <Route exact path='/posts'>
+          <Route exact path='http://angry-shape.surge.sh/posts'>
             <PostForm />
           </Route>
-          <Route exact path='/users'>
+          <Route exact path='http://angry-shape.surge.sh/users'>
             <UserList />
           </Route>
-          <Route exact path='/login'>
+          <Route exact path='http://angry-shape.surge.sh/login'>
             <Login />
           </Route>
           <Route
             exact
-            path='/chats/:id_to'
+            path='http://angry-shape.surge.sh/chats/:id_to'
             children={<ChatForm></ChatForm>}
           ></Route>
           <Route
             exact
-            path='/users/:id'
+            path='http://angry-shape.surge.sh/users/:id'
             children={<SingleUser></SingleUser>}
           ></Route>
           <Route path='*'>
