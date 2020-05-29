@@ -200,7 +200,7 @@ export default function Login() {
         handleAlert({ type: 'success', text: 'Succesfully Registered!' });
         // userLogin(newUser);
         // return <Redirect to='/' />;
-        window.location.replace('http://localhost:3000/');
+        window.location.replace('http://angry-shape.surge.sh/');
       } else {
         handleAlert({ type: 'danger', text: 'Some error occured!' });
       }
