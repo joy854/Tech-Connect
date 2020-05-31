@@ -185,7 +185,7 @@ export default function Login() {
     console.log(image);
     if (!image)
       setImage(
-        'https://www.pikpng.com/pngl/m/74-748374_laptop-user-personal-computer-computer-icons-computer-user.png'
+        'https://i.ya-webdesign.com/images/typing-clipart-cartoon-16.png'
       );
     // console.log('hi');
     let response;
