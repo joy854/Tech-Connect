@@ -122,8 +122,7 @@ export default function Login() {
   const registerUser = async (e) => {
     let img = image;
     if (!img)
-      img =
-        'https://www.pikpng.com/pngl/m/74-748374_laptop-user-personal-computer-computer-icons-computer-user.png';
+      img = 'https://i.ya-webdesign.com/images/typing-clipart-cartoon-16.png';
     let response = await fetch(
       'https://guarded-woodland-97115.herokuapp.com/register',
       {
