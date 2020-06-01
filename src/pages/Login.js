@@ -182,10 +182,10 @@ export default function Login() {
   const onSubmitRegister = async (e) => {
     e.preventDefault();
     console.log(image);
-    if (!image)
-      setImage(
-        'https://i.ya-webdesign.com/images/typing-clipart-cartoon-16.png'
-      );
+    // if (!image)
+    //   setImage(
+    //     'https://i.ya-webdesign.com/images/typing-clipart-cartoon-16.png'
+    //   );
     // console.log('hi');
     let response;
     if (!isMember) {
