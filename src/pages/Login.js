@@ -199,7 +199,7 @@ export default function Login() {
         handleAlert({ type: 'success', text: 'Succesfully Registered!' });
         // userLogin(newUser);
         // return <Redirect to='/' />;
-        window.location.replace('http://angry-shape.surge.sh/');
+        window.location.replace('http://tech-connect.surge.sh/');
       } else {
         handleAlert({ type: 'danger', text: 'Some error occured!' });
       }
