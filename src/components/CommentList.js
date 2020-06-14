@@ -24,7 +24,7 @@ export default function CommentList({ post }) {
   return (
     <div className=''>
       <div class='row'>
-        <div class='col-md-2'>
+        <div class='col-xs-2 col-sm-2 col-md-2'>
           <img
             src={userDetails.image}
             alt='No Profile Picture'
@@ -39,6 +39,7 @@ export default function CommentList({ post }) {
         <div class='col-md-8 '>
           <input
             type='text'
+            style={{ margin: '4%', marginLeft: '0' }}
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
           />
@@ -47,7 +48,8 @@ export default function CommentList({ post }) {
         <div class='col-md-2 '>
           <input
             type='button'
-            className='btn btn-primary'
+            className=' BUTTON_LAI'
+            style={{ margin: '4%', marginLeft: '0' }}
             value='Add'
             onClick={() => {
               let username = userDetails.username;

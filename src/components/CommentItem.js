@@ -15,9 +15,9 @@ export default function CommentItem({ element }) {
         <div>
           {' '}
           {element.fname} {element.lname}
+          <br />
         </div>
       </div>
-
       <div class='col-md-8 '>
         <p>{element.content}</p>
         {/* <Link to={url} className='btn btn-primary'>
