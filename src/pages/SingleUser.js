@@ -161,16 +161,18 @@ export default function SingleUser() {
           <img src={person.image} className='img-user-profile' />
           <br />
           <br />
-          <h2>
+          <h3 className='user-name' style={{}}>
             {person.fname} {person.lname}
             <br />
             (Username: {person.username})
-          </h2>
+          </h3>
           <br />
-          <h4>Student at {person.institute}</h4>
+          <h4 className='ins-name'>Student at {person.institute}</h4>
           <h6>
             {person.city},{person.country}{' '}
           </h6>
+          <br />
+
           {/* {user.id === id ? <h1>:<div></div> }   users are able to follow themselves */}
           {returnBtn()}
           {/* {user.id === id? <h1 />:<div></div>} */}

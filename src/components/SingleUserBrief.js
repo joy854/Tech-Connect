@@ -11,7 +11,7 @@ export default function SingleUserBrief({ user }) {
           className='img-profile'
         />
       </div>
-      <div class='col-md-8 '>
+      <div class='col-md-8 user-brief'>
         <h3>
           {user.fname} {user.lname}
         </h3>
