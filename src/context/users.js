@@ -134,7 +134,7 @@ function UsersProvider({ children }) {
       .then((res) => {
         // console.log(res.data);
         setFollowers(res.data);
-        // localStorage.setItem('followers', JSON.stringify(res.data)); //storing users in local storage so users dont get lost when pg is reloaded.(no change in user thhen users wont be updated)
+        localStorage.setItem('followers', JSON.stringify(res.data)); //storing users in local storage so users dont get lost when pg is reloaded.(no change in user thhen users wont be updated)
         return res.data;
       })
       .catch((error) => console.log(error));

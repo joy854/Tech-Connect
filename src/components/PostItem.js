@@ -228,61 +228,57 @@ export default function PostItem({ element }) {
   };
 
   return (
-    <div>
-      <div
-        className='post-item-container'
-        style={{ overflowWrap: 'break-word' }}
-      >
-        <div style={{ marginBottom: '0.5rem' }}>
-          <div className=''>
-            <img
-              src={element.image_url}
-              alt='No Profile Picture'
-              className='img-profile-post'
-            />
-            &nbsp;&nbsp;&nbsp;
-            <span>
-              {element.fname} {element.lname}
-            </span>
-          </div>
-          {/* <div> */}
-          {urlOfPost()}
+    <div className='post-item-container' style={{ overflowWrap: 'break-word' }}>
+      <div style={{ marginBottom: '0.5rem' }}>
+        <div className=''>
+          <img
+            src={element.image_url}
+            alt='No Profile Picture'
+            className='img-profile-post'
+          />
+          &nbsp;&nbsp;&nbsp;
+          <span>
+            {element.fname} {element.lname}
+          </span>
+        </div>
+        {/* <div> */}
+        {urlOfPost()}
 
-          <p>{element.content}</p>
-          {/* <Link to={url} className='btn btn-primary'>
+        <p>{element.content}</p>
+        {/* <Link to={url} className='btn btn-primary'>
           View Profile
         </Link> */}
-          {/* </div> */}
-          {/* {likeUnlike ? <span>liked</span> : <FaRegThumbsUp />} */}
-          {returnIcon()}
-          <div
-            className='row'
-            style={{ border: 'none', position: 'relative', padding: '0' }}
-          >
-            <div className='col-md-9 col-sm-12' style={{}}>
-              {showHideCmnt()}
-            </div>
-            <div className='col-md-3 col-sm-12' style={{}}>
-              {element.id === user.id && (
-                <input
-                  type='button'
-                  onClick={() => {
-                    deletePostForUser(postid);
-                    // toggleInsertPostHelper();
-                    // localStorage.setItem(
-                    //   'comments',
-                    //   JSON.stringify(visibleComments)
-                    // );
-                  }}
-                  value='Delete Post'
-                  className=' BUTTON_NXY'
-                  // style={{ position: 'absolute', right: '1%' }}
-                />
-              )}
-            </div>
+        {/* </div> */}
+        {/* {likeUnlike ? <span>liked</span> : <FaRegThumbsUp />} */}
+        {returnIcon()}
+        <div
+          className='row'
+          style={{ border: 'none', position: 'relative', padding: '0' }}
+        >
+          <div className='col-md-9 col-sm-12' style={{}}>
+            {showHideCmnt()}
+          </div>
+          <div className='col-md-3 col-sm-12' style={{}}>
+            {element.id === user.id && (
+              <input
+                type='button'
+                onClick={() => {
+                  deletePostForUser(postid);
+                  // toggleInsertPostHelper();
+                  // localStorage.setItem(
+                  //   'comments',
+                  //   JSON.stringify(visibleComments)
+                  // );
+                }}
+                value='Delete Post'
+                className=' BUTTON_NXY'
+                // style={{ position: 'absolute', right: '1%' }}
+              />
+            )}
           </div>
         </div>
       </div>
+
       {checkComment()}
     </div>
   );

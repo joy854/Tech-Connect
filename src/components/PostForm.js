@@ -78,7 +78,7 @@ export default function PostForm() {
 
   if (!user.id) return <Redirect to='/' />;
   return (
-    <section className='section mid-container'>
+    <section className='section mid-container' style={{ width: '70%' }}>
       <form>
         <h1>Posts</h1>
         <div className='form-center'>
@@ -95,29 +95,30 @@ export default function PostForm() {
               value={singleSkill}
               onChange={handleSingleSkill}
             /> */}
-            <textarea
-              id='newpost'
-              rows='10'
-              cols='100'
-              placeholder='Write Something Here....'
-              value={text}
-              onChange={(e) => {
-                setText(e.target.value);
-              }}
-            ></textarea>
-            <p>
-              <input
-                type='text'
-                className='form-control'
-                id='url'
-                name='url'
-                placeholder='Enter Image Url (Optional)'
-                value={url}
+            <div className='input-post'>
+              <textarea
+                style={{ width: '100%', height: '300px' }}
+                id='newpost'
+                placeholder='Write Something Here....'
+                value={text}
                 onChange={(e) => {
-                  setUrl(e.target.value);
+                  setText(e.target.value);
                 }}
-              />
-            </p>
+              ></textarea>
+              <p>
+                <input
+                  type='text'
+                  className='form-control'
+                  id='url'
+                  name='url'
+                  placeholder='Enter Image Url (Optional)'
+                  value={url}
+                  onChange={(e) => {
+                    setUrl(e.target.value);
+                  }}
+                />
+              </p>
+            </div>
           </div>
           <input
             type='button'
@@ -131,6 +132,7 @@ export default function PostForm() {
               // toggleBtnClick();
             }}
           />
+
           {/* <button
             className='btn btn-primary'
             onClick={() => {

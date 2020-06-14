@@ -221,9 +221,10 @@ li {
 }
 .post-item-container {
   text-align: left;
+  width: 80%;
   padding: 1rem;
   border-radius: 2rem;
-  margin: 2rem;
+  margin: 3rem auto;
   background: rgb(76, 76, 76); /* Old browsers */
   background: -moz-linear-gradient(
     -45deg,
