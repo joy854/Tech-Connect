@@ -448,6 +448,12 @@ export default function Login() {
 
             {alert.show && <Alert type={alert.type} text={alert.text} />}
             <Alert />
+
+            {/* skills list */}
+
+            {!isMember && <SkillForm />}
+            {!isMember && <SkillList />}
+
             {/* submit btn */}
             {!isEmpty && (
               <button
@@ -458,11 +464,8 @@ export default function Login() {
                 Submit
               </button>
             )}
-            {/* skills list */}
-
-            {!isMember && <SkillForm />}
-            {!isMember && <SkillList />}
-
+            <br />
+            <br />
             {/* register link */}
             <p className='register-link'>
               {isMember ? 'Need to register' : 'Already a member'}
