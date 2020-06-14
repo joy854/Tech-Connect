@@ -121,11 +121,7 @@ export default function PostItem({ element }) {
     if (likeUnlike)
       return (
         <span>
-          <button
-            onClick={unlike}
-            className='BUTTON_LAI'
-            style={{ transition: 'transform .5s ease-in' }}
-          >
+          <button onClick={unlike} className='BUTTON_LAI' style={{}}>
             <FaThumbsUp />
             &nbsp; Liked ({likeCnt}){' '}
           </button>
@@ -134,11 +130,7 @@ export default function PostItem({ element }) {
     else
       return (
         <span>
-          <button
-            onClick={like}
-            className='BUTTON_LAI'
-            style={{ transition: '0.5s' }}
-          >
+          <button onClick={like} className='BUTTON_LAI' style={{}}>
             <FaRegThumbsUp />
             &nbsp; Like ({likeCnt}){' '}
           </button>
@@ -254,11 +246,12 @@ export default function PostItem({ element }) {
         {/* </div> */}
         {/* {likeUnlike ? <span>liked</span> : <FaRegThumbsUp />} */}
         {returnIcon()}
+        {/* <div className='container-fluid'> */}
         <div className='row' style={{ border: 'none', padding: '0' }}>
-          <div className='col-md-6 col-sm-12' style={{}}>
+          <div className='col-xs-6 col-sm-6 col-md-6 ' style={{}}>
             {showHideCmnt()}
           </div>
-          <div className='col-md-6 col-sm-12 del-btn' style={{}}>
+          <div className='del-btn col-xs-6 col-sm-6 col-md-6  ' style={{}}>
             {element.id === user.id && (
               <input
                 type='button'
@@ -277,6 +270,7 @@ export default function PostItem({ element }) {
             )}
           </div>
         </div>
+        {/* </div> */}
       </div>
 
       {checkComment()}
