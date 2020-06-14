@@ -124,7 +124,7 @@ export default function PostItem({ element }) {
           <button
             onClick={unlike}
             className='BUTTON_LAI'
-            style={{ transition: 'transform .3s ease-in' }}
+            style={{ transition: 'transform .5s ease-in' }}
           >
             <FaThumbsUp />
             &nbsp; Liked ({likeCnt}){' '}
@@ -228,7 +228,10 @@ export default function PostItem({ element }) {
   };
 
   return (
-    <div className='post-item-container' style={{ overflowWrap: 'break-word' }}>
+    <div
+      className=' post-item-container'
+      style={{ overflowWrap: 'break-word' }}
+    >
       <div style={{ marginBottom: '0.5rem' }}>
         <div className=''>
           <img
@@ -243,7 +246,7 @@ export default function PostItem({ element }) {
         </div>
         {/* <div> */}
         {urlOfPost()}
-
+        <br />
         <p>{element.content}</p>
         {/* <Link to={url} className='btn btn-primary'>
           View Profile
@@ -251,14 +254,11 @@ export default function PostItem({ element }) {
         {/* </div> */}
         {/* {likeUnlike ? <span>liked</span> : <FaRegThumbsUp />} */}
         {returnIcon()}
-        <div
-          className='row'
-          style={{ border: 'none', position: 'relative', padding: '0' }}
-        >
-          <div className='col-md-9 col-sm-12' style={{}}>
+        <div className='row' style={{ border: 'none', padding: '0' }}>
+          <div className='col-md-6 col-sm-12' style={{}}>
             {showHideCmnt()}
           </div>
-          <div className='col-md-3 col-sm-12' style={{}}>
+          <div className='col-md-6 col-sm-12 del-btn' style={{}}>
             {element.id === user.id && (
               <input
                 type='button'
