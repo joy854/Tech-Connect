@@ -10,7 +10,8 @@ export default function Service() {
             <h1 class='display-4'>Explore</h1>
             <p class='lead'>
               Have a doubt in a complex algorithmic problem? Looking for a job?
-              Don't worry! We have got it all covered.
+              Don't worry! We have got it all covered. Join now and get your
+              doubts cleared by expert coders.
             </p>
             <a href='#' class='btn btn-outline-secondary'>
               Find Out More

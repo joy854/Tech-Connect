@@ -7,6 +7,7 @@ import { UserProvider } from './context/user';
 import { SkillProvider } from './context/skills';
 import { PostProvider } from './context/post';
 import { AlertProvider } from './context/alert';
+import { FilteredUserProvider } from './context/filteredusers';
 import App from './App';
 // import * as serviceWorker from './serviceWorker';
 
@@ -14,11 +15,13 @@ ReactDOM.render(
   <AlertProvider>
     <UserProvider>
       <UsersProvider>
-        <PostProvider>
-          <SkillProvider>
-            <App />
-          </SkillProvider>
-        </PostProvider>
+        <FilteredUserProvider>
+          <PostProvider>
+            <SkillProvider>
+              <App />
+            </SkillProvider>
+          </PostProvider>
+        </FilteredUserProvider>
       </UsersProvider>
     </UserProvider>
   </AlertProvider>,

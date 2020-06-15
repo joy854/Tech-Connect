@@ -5,7 +5,7 @@ export default function Hero({ children }) {
     <div className='hero' style={{ marginBottom: '2%' }}>
       <div className='banner'>
         <h1>Eat, code, sleep, repeat!</h1>
-        <p>Embrace your choices - we do</p>
+        <p>Learn-Grow-Inspire</p>
         {children}
       </div>
     </div>

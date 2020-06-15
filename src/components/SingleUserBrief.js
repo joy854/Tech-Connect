@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 export default function SingleUserBrief({ user }) {
   const url = `/users/${user.id}`;
   return (
-    <div class='row'>
+    <div class='row row-users ' style={{ borderRadius: '10%' }}>
       <div class='col-md-4 mid-container'>
         <img
           src={user.image}
