@@ -12,7 +12,7 @@ function FilteredUserProvider({ children }) {
   //     setFilterUser()
   //     return () => {};
   //   }, []);
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
     let newUsers = users.filter((item) => {
       return item;
     });
