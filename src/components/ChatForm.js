@@ -42,7 +42,7 @@ export default function ChatForm() {
     <section className='section mid-container'>
       <form>
         <h1>Type your Message Below:</h1>
-
+        <br />
         <div className='form-center'>
           <div className='form-group'>
             {/* <input
@@ -56,8 +56,7 @@ export default function ChatForm() {
             /> */}
             <textarea
               id='newpost'
-              rows='5'
-              cols='30'
+              style={{ width: '70%', height: '150px' }}
               placeholder='Write Something Here....'
               value={chatText}
               onChange={(e) => {

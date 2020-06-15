@@ -35,12 +35,14 @@ function FilteredUserProvider({ children }) {
     // console.log('fname', users);
     // console.log('lname', lname);
     if (fname !== '') {
+      fname = fname.toLowerCase().trim();
       newUsers = newUsers.filter((item) => {
         let origFname = item.fname.toLowerCase().trim();
         return origFname.startsWith(fname) ? item : null;
       });
     }
     if (lname !== '') {
+      lname = lname.toLowerCase().trim();
       newUsers = newUsers.filter((item) => {
         let origLname = item.lname.toLowerCase().trim();
         return origLname.startsWith(lname) ? item : null;
