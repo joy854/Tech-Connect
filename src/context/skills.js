@@ -29,7 +29,7 @@ function SkillProvider({ children }) {
       sid: uuid(),
       title: singleSkill,
     };
-    setSkill([...skill, newitem]);
+    if (singleSkill.length) setSkill([...skill, newitem]);
     setSingleSkill('');
     console.log(skill);
   };

@@ -5,7 +5,7 @@ export default function SkillList() {
   const { skill } = React.useContext(SkillContext);
   return (
     <div>
-      <ul className='list'>
+      <ul className='list' style={{ textAlign: 'center', margin: 'auto' }}>
         {skill.map((item) => {
           return <Item key={item.sid} title={item.title} sid={item.sid} />;
         })}

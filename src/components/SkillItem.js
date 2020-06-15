@@ -22,28 +22,35 @@ export default function Skill({ sid, title }) {
     //     />
     //   </div>
     // </div>
-    <li className='item'>
-      <div
-        className='row orientation'
-        style={{ width: '50%', padding: '1%', textAlign: 'left' }}
-      >
+    <li className='item' style={{}}>
+      <div className='container-fluid' style={{ width: '70%' }}>
         <div
-          className='col-md-8'
-          style={{ height: '100%', overflow: 'hidden' }}
+          className='row post-item-container'
+          style={{
+            padding: '1.5%',
+            textAlign: 'left',
+            // marginRight: '0',
+            // marginLeft: '3%',
+            left: '0',
+            overflowWrap: 'break-word',
+          }}
         >
-          {/* <div className='title' style={{ paddingTop: '2%' }}> */}
-          {title}
-          {/* </div> */}
-        </div>
-        <div className='col-md-4'>
-          <input
-            type='button'
-            value='Delete'
-            className='BUTTON_LAI'
-            aria-label='delete button'
-            onClick={() => handleDelete(sid)}
-          />
-          {/* <MdDelete /> */}
+          <div className='col-md-8' style={{}}>
+            {/* <div className='title' style={{ paddingTop: '2%' }}> */}
+            {title}
+            {/* </div> */}
+          </div>
+          <div className='col-md-4'>
+            <input
+              type='button'
+              value='Delete'
+              className='BUTTON_LAI'
+              style={{ float: 'right', marginLeft: '0' }}
+              // aria-label='delete button'
+              onClick={() => handleDelete(sid)}
+            />
+            {/* <MdDelete /> */}
+          </div>
         </div>
       </div>
     </li>
