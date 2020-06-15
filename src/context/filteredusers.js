@@ -1,8 +1,10 @@
 import React from 'react';
 import { UsersContext } from './users';
+import { UserContext } from './user';
 const FilteredUserContext = React.createContext();
 
 function FilteredUserProvider({ children }) {
+  const { userDetails } = React.useContext(UserContext);
   const { users } = React.useContext(UsersContext);
   const [filterUser, setFilterUser] = React.useState(users);
   const [name, setName] = React.useState('');
@@ -12,7 +14,7 @@ function FilteredUserProvider({ children }) {
   //     setFilterUser()
   //     return () => {};
   //   }, []);
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     let newUsers = users.filter((item) => {
       return item;
     });
@@ -56,9 +58,13 @@ function FilteredUserProvider({ children }) {
         if (origIns === category) return item;
       });
     }
+    // const curr = newUsers.filter((item) => {
+    //   if (item.id === userDetails.id) return item;
+    // });
+    // if (curr.length === 0) newUsers.push(userDetails);
     setFilterUser(newUsers);
     console.log('fname', newUsers);
-  }, [name, category]);
+  }, [name, category, users]);
 
   return (
     <FilteredUserContext.Provider

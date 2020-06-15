@@ -2,16 +2,20 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
 import { UserContext } from '../context/user';
+import { UsersContext } from '../context/users';
 import SkillList from '../components/SkillList';
 import SkillForm from '../components/SkillForm';
 import { SkillContext } from '../context/skills';
 import { AlertContext } from '../context/alert';
 import Alert from '../components/Alert';
-import Home from './Home';
+
 export default function Login() {
   const history = useHistory();
   // setup user context
   const { user, userLogin } = React.useContext(UserContext);
+  const { getAllUser, getAllTitle, getAllFollower } = React.useContext(
+    UsersContext
+  );
   const { alert, handleAlert } = React.useContext(AlertContext);
   const { skill } = React.useContext(SkillContext);
   // state values
@@ -197,9 +201,13 @@ export default function Login() {
         };
         storeSkill(newUser.id);
         handleAlert({ type: 'success', text: 'Succesfully Registered!' });
-        // userLogin(newUser);
+        userLogin(newUser);
+        getAllFollower();
+        getAllTitle();
+        getAllUser();
+        handleAlert({ type: 'success', text: 'Logged in!' });
         // return <Redirect to='/' />;
-        window.location.replace('http://tech-connect.surge.sh/');
+        // window.location.replace('http://tech-connect.surge.sh/');
       } else {
         handleAlert({ type: 'danger', text: 'Some error occured!' });
       }
@@ -211,6 +219,9 @@ export default function Login() {
           id: response.id,
         };
         userLogin(newUser);
+        getAllFollower();
+        getAllTitle();
+        getAllUser();
         handleAlert({ type: 'success', text: 'Logged in!' });
       } else {
         handleAlert({ type: 'danger', text: 'Some error occured!' });
