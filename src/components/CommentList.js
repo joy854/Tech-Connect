@@ -39,7 +39,7 @@ export default function CommentList({ post }) {
         <div class='col-md-8 '>
           <input
             type='text'
-            style={{ margin: '4%', marginLeft: '0' }}
+            style={{ margin: '4%', marginLeft: '0', width: '100%' }}
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
           />
