@@ -29,7 +29,7 @@ export default function CommentItem({ element }) {
         {user.id === element.commenter_id && (
           <input
             type='button'
-            className='btn btn-danger'
+            className='BUTTON_NXY'
             value='Delete'
             onClick={() =>
               delCommentForUser(element.id, element.comment_id, element.post_id)
