@@ -142,7 +142,7 @@ export default function SingleUser() {
   }, [id, doesFollow, user]);
   // const url2 = `/users/${parseInt(id)}`;
 
-  if (!user.id) return <Redirect to='/users/189/32' />;
+  if (!user.id) return <Redirect to='/' />;
 
   // const notFollow = () => {
   //   //return follow btn if user.id doesn't follow id

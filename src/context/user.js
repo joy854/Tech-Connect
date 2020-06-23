@@ -409,7 +409,6 @@ function UserProvider({ children }) {
     getComments(item.id);
     getChats();
     getLikes();
-    return <Redirect to='/' />;
 
     // console.log(item.id, item.username, userDetails);
     // console.log('posts', postsOfUser);
@@ -421,6 +420,8 @@ function UserProvider({ children }) {
     setUser({ username: null, id: null });
     localStorage.removeItem('token');
     setToken('');
+    return <Redirect to='/' />;
+
     // history.push('/');
     // return <Redirect to='/' />;
   };
