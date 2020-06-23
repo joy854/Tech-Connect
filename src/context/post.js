@@ -12,9 +12,13 @@ const PostContext = React.createContext();
 // }
 
 function PostProvider({ children }) {
-  const { user, postsOfUser, setPostsOfUser, userDetails } = React.useContext(
-    UserContext
-  );
+  const {
+    user,
+    postsOfUser,
+    setPostsOfUser,
+    userDetails,
+    token,
+  } = React.useContext(UserContext);
 
   const [text, setText] = React.useState('');
   const [url, setUrl] = React.useState('');
@@ -52,14 +56,20 @@ function PostProvider({ children }) {
       return;
     }
     const response = await axios
-      .post('https://guarded-woodland-97115.herokuapp.com/insertPost', {
-        id,
-        text,
-        url,
-        post_id,
-      })
+      .post(
+        'https://guarded-woodland-97115.herokuapp.com/insertPost',
+        {
+          id,
+          text,
+          url,
+          post_id,
+        },
+        {
+          headers: { authorization: `Bearer ${token}` },
+        }
+      )
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         return res.data;
       })
       .catch((error) => console.log(error));
@@ -80,13 +90,13 @@ function PostProvider({ children }) {
     };
 
     setPostsOfUser([item, ...postsOfUser]);
-    console.log('insert user', postsOfUser);
+    // console.log('insert user', postsOfUser);
     insertPost(pid);
   };
 
   async function deletePost(postid) {
     let id = user.id;
-    console.log(id, postid);
+    // console.log(id, postid);
     if (!id) {
       // setPostsOfUser([]);
       return;
@@ -98,7 +108,7 @@ function PostProvider({ children }) {
         postid,
       })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         return res.data;
       })
       .catch((error) => console.log(error));
@@ -111,14 +121,14 @@ function PostProvider({ children }) {
     });
 
     setPostsOfUser(newArr);
-    console.log('delete user', postsOfUser);
+    // console.log('delete user', postsOfUser);
     deletePost(postid);
   };
 
   const submitPost = async (e) => {
     // e.preventDefault();
 
-    console.log(url, text);
+    // console.log(url, text);
 
     // const res = await insertPost();
     insertPostForUser();

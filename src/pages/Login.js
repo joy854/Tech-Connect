@@ -12,7 +12,7 @@ import Alert from '../components/Alert';
 export default function Login() {
   const history = useHistory();
   // setup user context
-  const { user, userLogin } = React.useContext(UserContext);
+  const { user, userLogin, token, setToken } = React.useContext(UserContext);
   const { getAllUser, getAllTitle, getAllFollower } = React.useContext(
     UsersContext
   );
@@ -173,11 +173,7 @@ export default function Login() {
     )
       .then((newUser) => newUser.json())
       .then((item) => {
-        const obj = {
-          username: item.username,
-          id: item.id,
-        };
-        return obj;
+        return item;
       })
       .catch((err) => console.log(err));
     return response;
@@ -185,7 +181,7 @@ export default function Login() {
 
   const onSubmitRegister = async (e) => {
     e.preventDefault();
-    console.log(image);
+    // console.log(image);
     // if (!image)
     //   setImage(
     //     'https://i.ya-webdesign.com/images/typing-clipart-cartoon-16.png'
@@ -201,10 +197,13 @@ export default function Login() {
         };
         storeSkill(newUser.id);
         handleAlert({ type: 'success', text: 'Succesfully Registered!' });
-        userLogin(newUser);
-        getAllFollower();
-        getAllTitle();
-        getAllUser();
+        let r2 = await loginUser();
+        setToken(r2.token);
+        localStorage.setItem('token', JSON.stringify(r2.token));
+        userLogin(r2.user[0]);
+        // getAllFollower();
+        // getAllTitle();
+        // getAllUser();
         handleAlert({ type: 'success', text: 'Logged in!' });
         // return <Redirect to='/' />;
         // window.location.replace('http://tech-connect.surge.sh/');
@@ -213,15 +212,14 @@ export default function Login() {
       }
     } else {
       response = await loginUser();
-      if (response.id) {
-        const newUser = {
-          username,
-          id: response.id,
-        };
-        userLogin(newUser);
-        getAllFollower();
-        getAllTitle();
-        getAllUser();
+      // console.log(response);
+      if (response.token) {
+        setToken(response.token);
+        localStorage.setItem('token', JSON.stringify(response.token));
+        userLogin(response.user[0]);
+        // getAllFollower();
+        // getAllTitle();
+        // getAllUser();
         handleAlert({ type: 'success', text: 'Logged in!' });
       } else {
         handleAlert({ type: 'danger', text: 'Some error occured!' });

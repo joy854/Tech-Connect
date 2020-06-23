@@ -8,16 +8,16 @@ import { Redirect } from 'react-router-dom';
 
 const UserContext = React.createContext();
 
-function getUserFromLocalStorage() {
-  return localStorage.getItem('user')
-    ? JSON.parse(localStorage.getItem('user'))
-    : { username: null, id: null };
-}
-function getUserDetailFromLocalStorage() {
-  return localStorage.getItem('detail')
-    ? JSON.parse(localStorage.getItem('detail'))
-    : { username: null, id: null };
-}
+// function getUserFromLocalStorage() {
+//   return localStorage.getItem('user')
+//     ? JSON.parse(localStorage.getItem('user'))
+//     : { username: null, id: null };
+// }
+// function getUserDetailFromLocalStorage() {
+//   return localStorage.getItem('detail')
+//     ? JSON.parse(localStorage.getItem('detail'))
+//     : { username: null, id: null };
+// }
 
 // function getCommentsDetailFromLocalStorage() {
 //   return localStorage.getItem('comments')
@@ -30,12 +30,21 @@ function getUserDetailFromLocalStorage() {
 //     ? JSON.parse(localStorage.getItem('posts'))
 //     : [];
 // }
+function getTokenFromLocalStorage() {
+  return localStorage.getItem('token')
+    ? JSON.parse(localStorage.getItem('token'))
+    : '';
+}
 
 function UserProvider({ children }) {
-  const [user, setUser] = React.useState(getUserFromLocalStorage());
-  const [userDetails, setUserDetails] = React.useState(
-    getUserDetailFromLocalStorage()
-  );
+  // const [user, setUser] = React.useState(getUserFromLocalStorage());
+  // const [userDetails, setUserDetails] = React.useState(
+  //   getUserDetailFromLocalStorage()
+  // );
+  const [token, setToken] = React.useState(getTokenFromLocalStorage());
+  const [user, setUser] = React.useState([]);
+  const [users, setUsers] = React.useState([]);
+  const [userDetails, setUserDetails] = React.useState([]);
   const [postsOfUser, setPostsOfUser] = React.useState([]);
   const [visibleComments, setVisibleComments] = React.useState([]);
   const [allChats, setAllChats] = React.useState([]);
@@ -56,8 +65,8 @@ function UserProvider({ children }) {
     const response = await axios
       .get('https://guarded-woodland-97115.herokuapp.com/getLikes', {})
       .then((res) => {
-        console.log('likes', res.data);
-        localStorage.setItem('likes', JSON.stringify(res.data));
+        // console.log('likes', res.data);
+        // localStorage.setItem('likes', JSON.stringify(res.data));
         setAllLikes(res.data);
         return res.data;
       })
@@ -73,7 +82,7 @@ function UserProvider({ children }) {
         post_id,
       })
       .then((res) => {
-        console.log('insert like', res.data);
+        // console.log('insert like', res.data);
         return res.data;
       })
       .catch((error) => console.log(error));
@@ -97,7 +106,7 @@ function UserProvider({ children }) {
         post_id,
       })
       .then((res) => {
-        console.log('delete like', res.data);
+        // console.log('delete like', res.data);
         return res.data;
       })
       .catch((error) => console.log(error));
@@ -118,8 +127,8 @@ function UserProvider({ children }) {
         userid,
       })
       .then((res) => {
-        console.log('posts', res.data);
-        localStorage.setItem('posts', JSON.stringify(res.data));
+        // console.log('posts', res.data);
+        // localStorage.setItem('posts', JSON.stringify(res.data));
         setPostsOfUser(res.data);
         return res.data;
       })
@@ -138,8 +147,8 @@ function UserProvider({ children }) {
         userid,
       })
       .then((res) => {
-        console.log('comments', res.data);
-        localStorage.setItem('comments', JSON.stringify(res.data));
+        // console.log('comments', res.data);
+        // localStorage.setItem('comments', JSON.stringify(res.data));
         setVisibleComments(res.data);
         return res.data;
       })
@@ -153,8 +162,8 @@ function UserProvider({ children }) {
         userid,
       })
       .then((res) => {
-        console.log('user', res.data);
-        localStorage.setItem('detail', JSON.stringify(res.data));
+        // console.log('user', res.data);
+        // localStorage.setItem('detail', JSON.stringify(res.data));
         setUserDetails(res.data);
         return res.data;
       })
@@ -167,9 +176,9 @@ function UserProvider({ children }) {
     const response = await axios
       .get('https://guarded-woodland-97115.herokuapp.com/getChats', {})
       .then((res) => {
-        localStorage.setItem('chats', JSON.stringify(res.data));
+        // localStorage.setItem('chats', JSON.stringify(res.data));
         setAllChats(res.data);
-        console.log('chats', res.data);
+        // console.log('chats', res.data);
         return res.data;
       })
       .catch((error) => console.log(error));
@@ -200,7 +209,7 @@ function UserProvider({ children }) {
         post_id,
       })
       .then((res) => {
-        console.log('comments', res.data);
+        // console.log('comments', res.data);
         return res.data;
       })
       .catch((error) => console.log(error));
@@ -249,7 +258,7 @@ function UserProvider({ children }) {
         comment_id,
       })
       .then((res) => {
-        console.log('comments', res.data);
+        // console.log('comments', res.data);
         return res.data;
       })
       .catch((error) => console.log(error));
@@ -291,7 +300,16 @@ function UserProvider({ children }) {
       c_id
     );
   };
-
+  async function getAllUser() {
+    const response = await axios
+      .get('https://guarded-woodland-97115.herokuapp.com/users')
+      .then((res) => {
+        // console.log(res.data);
+        setUsers(res.data);
+      })
+      .catch((error) => console.log(error));
+    return response;
+  }
   async function insertChat(userid, newId) {
     const response = await axios
       .post('https://guarded-woodland-97115.herokuapp.com/insertChat', {
@@ -305,7 +323,7 @@ function UserProvider({ children }) {
         image_to: '',
       })
       .then((res) => {
-        console.log('user', res.data);
+        // console.log('user', res.data);
         return res.data;
       })
       .catch((error) => console.log(error));
@@ -329,6 +347,8 @@ function UserProvider({ children }) {
   };
 
   const userLogin = (item) => {
+    // getUserFromToken();
+
     setUser(item);
     getDetails(item.id);
     getPosts(item.id);
@@ -338,12 +358,13 @@ function UserProvider({ children }) {
     // console.log(item.id, item.username, userDetails);
     // console.log('posts', postsOfUser);
     // console.log('comments', visibleComments);
-    localStorage.setItem('user', JSON.stringify(item));
+    // localStorage.setItem('user', JSON.stringify(item));
   };
 
   const userLogout = () => {
     setUser({ username: null, id: null });
-    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+    setToken('');
     // history.push('/');
     // return <Redirect to='/' />;
   };
@@ -352,13 +373,30 @@ function UserProvider({ children }) {
   //   msg: '',
   //   type: 'success',
   // });
+  async function getUserFromToken() {
+    const response = await axios
+      .post('https://guarded-woodland-97115.herokuapp.com/getUserFromToken', {
+        usertoken: token,
+      })
+      .then((res) => {
+        userLogin(res.data);
+      })
+      .catch((error) => console.log(error));
+    return response;
+  }
 
-  // React.useEffect(() => {
-  //   getPosts(); //will result in error when user signs out
-  //   getComments();
-  //   console.log('posts', postsOfUser);
-  //   console.log('comments', visibleComments);
-  // }, [user]);
+  React.useEffect(() => {
+    // getPosts(); //will result in error when user signs out
+    // getComments();
+    // console.log('posts', postsOfUser);
+    // console.log('comments', visibleComments);
+    if (token) {
+      getAllUser();
+      getUserFromToken();
+    }
+    // console.log('user.js');
+  }, []);
+
   // const showAlert = ({ msg, type = 'success' }) => {
   //   setAlert({ show: true, msg, type });
   // };
@@ -370,6 +408,9 @@ function UserProvider({ children }) {
       value={{
         user,
         setUser,
+        token,
+        setToken,
+        users,
         userDetails,
         userLogin,
         userLogout,

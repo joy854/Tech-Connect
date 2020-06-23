@@ -15,7 +15,7 @@ function SkillProvider({ children }) {
   const handleDelete = (sid) => {
     const newSkill = skill.filter((item) => item.sid !== sid);
     setSkill(newSkill);
-    console.log(skill);
+    // console.log(skill);
   };
   const handleAdd = (e) => {
     e.preventDefault();
@@ -31,7 +31,7 @@ function SkillProvider({ children }) {
     };
     if (singleSkill.length) setSkill([...skill, newitem]);
     setSingleSkill('');
-    console.log(skill);
+    // console.log(skill);
   };
   return (
     <SkillContext.Provider

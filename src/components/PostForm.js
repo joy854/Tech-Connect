@@ -5,6 +5,7 @@ import { Redirect } from 'react-router-dom';
 import { PostContext } from '../context/post';
 import { UserContext } from '../context/user';
 import { UsersContext } from '../context/users';
+import { useHistory } from 'react-router-dom';
 
 import Error from '../pages/Error';
 export default function PostForm() {
@@ -21,27 +22,29 @@ export default function PostForm() {
     setAllLikes,
     visibleComments,
     setVisibleComments,
+    token,
   } = React.useContext(UserContext);
 
   const { followers } = React.useContext(UsersContext);
+  const history = useHistory();
 
-  function getCommentsDetailFromLocalStorage() {
-    return localStorage.getItem('comments')
-      ? JSON.parse(localStorage.getItem('comments'))
-      : [];
-  }
+  // function getCommentsDetailFromLocalStorage() {
+  //   return localStorage.getItem('comments')
+  //     ? JSON.parse(localStorage.getItem('comments'))
+  //     : [];
+  // }
 
-  function getPostsDetailFromLocalStorage() {
-    return localStorage.getItem('posts')
-      ? JSON.parse(localStorage.getItem('posts'))
-      : [];
-  }
+  // function getPostsDetailFromLocalStorage() {
+  //   return localStorage.getItem('posts')
+  //     ? JSON.parse(localStorage.getItem('posts'))
+  //     : [];
+  // }
 
-  function getLikesFromLocalStorage() {
-    return localStorage.getItem('likes')
-      ? JSON.parse(localStorage.getItem('likes'))
-      : [];
-  }
+  // function getLikesFromLocalStorage() {
+  //   return localStorage.getItem('likes')
+  //     ? JSON.parse(localStorage.getItem('likes'))
+  //     : [];
+  // }
 
   React.useEffect(() => {
     getPosts(user.id); //will result in error when user signs out
@@ -49,13 +52,14 @@ export default function PostForm() {
     getComments(user.id);
     if (window.performance) {
       if (performance.navigation.type === 1) {
-        setPostsOfUser(getPostsDetailFromLocalStorage());
-        setVisibleComments(getCommentsDetailFromLocalStorage());
-        setAllLikes(getLikesFromLocalStorage());
+        // setPostsOfUser(getPostsDetailFromLocalStorage());
+        // setVisibleComments(getCommentsDetailFromLocalStorage());
+        // setAllLikes(getLikesFromLocalStorage());
         // alert('This page is reloaded');
+        // history.push('/posts');
       }
     }
-    console.log('posts', postsOfUser);
+    // console.log('posts', postsOfUser);
     // console.log('comments', visibleComments);
   }, [followers, user.id]);
 
@@ -76,7 +80,7 @@ export default function PostForm() {
   //   funPostlist();
   // }, [postsOfUser]);
 
-  if (!user.id) return <Redirect to='/' />;
+  if (!token) return <Redirect to='/' />;
   return (
     <section className='section mid-container' style={{ width: '70%' }}>
       <form>

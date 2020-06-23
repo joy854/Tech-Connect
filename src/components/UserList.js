@@ -6,19 +6,23 @@ import Filters from './Filters';
 import { FilteredUserContext } from '../context/filteredusers';
 
 export default function UserList() {
-  const { user } = React.useContext(UserContext);
+  const { user, token } = React.useContext(UserContext);
   const { filterUser } = React.useContext(FilteredUserContext);
 
-  if (!user.id) return <Redirect to='/' />;
-  return (
-    <div className='section'>
-      <h1 style={{ textAlign: 'center' }}>Search Users</h1>
-      <Filters />
-      <div className='contain'>
-        {filterUser.map((user) => (
-          <SingleUserBrief user={user} />
-        ))}
-      </div>
-    </div>
-  );
+  const returnContent = () => {
+    if (token) {
+      return (
+        <div className='section'>
+          <h1 style={{ textAlign: 'center' }}>Search Users</h1>
+          <Filters />
+          <div className='contain'>
+            {filterUser.map((user) => (
+              <SingleUserBrief user={user} />
+            ))}
+          </div>
+        </div>
+      );
+    } else return <Redirect to='/' />;
+  };
+  return <div>{returnContent()}</div>;
 }

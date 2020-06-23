@@ -65,7 +65,7 @@ function FilteredUserProvider({ children }) {
     // });
     // if (curr.length === 0) newUsers.push(userDetails);
     setFilterUser(newUsers);
-    console.log('fname', newUsers);
+    // console.log('fname', newUsers);
   }, [name, category, users]);
 
   return (

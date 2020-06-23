@@ -4,32 +4,56 @@ import axios from 'axios';
 import { UserContext } from './user';
 const UsersContext = React.createContext();
 
-function getUsersFromLocalStorage() {
-  return localStorage.getItem('users')
-    ? JSON.parse(localStorage.getItem('users'))
-    : [];
-}
+// function getUsersFromLocalStorage() {
+//   return localStorage.getItem('users')
+//     ? JSON.parse(localStorage.getItem('users'))
+//     : [];
+// }
 
-function getTitlesFromLocalStorage() {
-  return localStorage.getItem('titles')
-    ? JSON.parse(localStorage.getItem('titles'))
-    : [];
-}
+// function getTitlesFromLocalStorage() {
+//   return localStorage.getItem('titles')
+//     ? JSON.parse(localStorage.getItem('titles'))
+//     : [];
+// }
 
-function getFollowersFromLocalStorage() {
-  return localStorage.getItem('followers')
-    ? JSON.parse(localStorage.getItem('followers'))
-    : [];
-}
+// function getFollowersFromLocalStorage() {
+//   return localStorage.getItem('followers')
+//     ? JSON.parse(localStorage.getItem('followers'))
+//     : [];
+// }
 
 function UsersProvider({ children }) {
   const { user } = React.useContext(UserContext);
 
-  const [users, setUsers] = React.useState(getUsersFromLocalStorage());
-  const [titles, setTitles] = React.useState(getTitlesFromLocalStorage());
-  const [followers, setFollowers] = React.useState(
-    getFollowersFromLocalStorage()
-  );
+  // const [users, setUsers] = React.useState(getUsersFromLocalStorage());
+  // const [titles, setTitles] = React.useState(getTitlesFromLocalStorage());
+  // const [followers, setFollowers] = React.useState(
+  //   getFollowersFromLocalStorage()
+  // );
+  async function getAllUser() {
+    const response = await axios
+      .get('https://guarded-woodland-97115.herokuapp.com/users')
+      .then((res) => {
+        // console.log(res.data);
+        setUsers(res.data);
+        // localStorage.setItem('users', JSON.stringify(res.data)); //storing users in local storage so users dont get lost when pg is reloaded.(no change in user thhen users wont be updated)
+        return res.data;
+        // const arr = [];
+        // Object.assign(arr, res.data);
+        // return arr;
+      })
+
+      //   .then((data) => {
+      //     console.log(data);
+      //     setUsers(data);
+      //   })
+      .catch((error) => console.log(error));
+    return response;
+  }
+
+  const [users, setUsers] = React.useState([]);
+  const [titles, setTitles] = React.useState([]);
+  const [followers, setFollowers] = React.useState([]);
   const [followBtnClickUnclick, setFollowBtnClickUnclick] = React.useState(
     false
   );
@@ -94,34 +118,13 @@ function UsersProvider({ children }) {
   //     return response;
   //   };
 
-  async function getAllUser() {
-    const response = await axios
-      .get('https://guarded-woodland-97115.herokuapp.com/users')
-      .then((res) => {
-        // console.log(res.data);
-        setUsers(res.data);
-        localStorage.setItem('users', JSON.stringify(res.data)); //storing users in local storage so users dont get lost when pg is reloaded.(no change in user thhen users wont be updated)
-        return res.data;
-        // const arr = [];
-        // Object.assign(arr, res.data);
-        // return arr;
-      })
-
-      //   .then((data) => {
-      //     console.log(data);
-      //     setUsers(data);
-      //   })
-      .catch((error) => console.log(error));
-    return response;
-  }
-
   async function getAllTitle() {
     const response = await axios
       .get('https://guarded-woodland-97115.herokuapp.com/getSkills')
       .then((res) => {
         // console.log(res.data);
         setTitles(res.data);
-        localStorage.setItem('titles', JSON.stringify(res.data)); //storing users in local storage so users dont get lost when pg is reloaded.(no change in user thhen users wont be updated)
+        // localStorage.setItem('titles', JSON.stringify(res.data)); //storing users in local storage so users dont get lost when pg is reloaded.(no change in user thhen users wont be updated)
         return res.data;
       })
       .catch((error) => console.log(error));
@@ -134,7 +137,7 @@ function UsersProvider({ children }) {
       .then((res) => {
         // console.log(res.data);
         setFollowers(res.data);
-        localStorage.setItem('followers', JSON.stringify(res.data)); //storing users in local storage so users dont get lost when pg is reloaded.(no change in user thhen users wont be updated)
+        // localStorage.setItem('followers', JSON.stringify(res.data)); //storing users in local storage so users dont get lost when pg is reloaded.(no change in user thhen users wont be updated)
         return res.data;
       })
       .catch((error) => console.log(error));
@@ -153,9 +156,10 @@ function UsersProvider({ children }) {
   //   // console.log(newUsers, item.id);
   // };
   React.useEffect(() => {
-    const response = getAllUser();
+    getAllUser();
     getAllTitle();
     getAllFollower();
+    // console.log(users);
     // console.log(followers);
     // setUsers(response);
     // users.map((item) => console.log(item.fname));

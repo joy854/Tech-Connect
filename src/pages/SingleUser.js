@@ -4,14 +4,21 @@ import { UsersContext, UsersProvider } from '../context/users';
 import { UserContext } from '../context/user';
 import { Redirect } from 'react-router-dom';
 import { FaFire } from 'react-icons/fa';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 export default function SingleUser() {
   const { id } = useParams();
-  const { user } = React.useContext(UserContext);
-  const { users, titles, followers, followBtn, unFollowBtn } = React.useContext(
-    UsersContext
-  );
+  const { user, token, users } = React.useContext(UserContext);
+  const {
+    // users,
+    titles,
+    followers,
+    followBtn,
+    unFollowBtn,
+    // getAllUser,
+  } = React.useContext(UsersContext);
+
   const url = `/chats/${parseInt(id)}`;
 
   const evalDoesFollow = () => {
@@ -31,10 +38,20 @@ export default function SingleUser() {
     if (isFollow.length) return true;
     else return false;
   };
-
+  // async function getAllUser() {
+  //   const response = await axios
+  //     .get('https://guarded-woodland-97115.herokuapp.com/users')
+  //     .then((res) => {
+  //       console.log(res.data);
+  //       setUsers(res.data);
+  //     })
+  //     .catch((error) => console.log(error));
+  //   return response;
+  // }
   const [person, setPerson] = React.useState({});
   const [skill, setSkill] = React.useState([]);
   const [follow, setFollow] = React.useState([]);
+  // const [users, setUsers] = React.useState([]);
   const [msgStatus, setMsgStatus] = React.useState(evalOtherFollow());
 
   const [doesFollow, setDoesFollow] = React.useState(evalDoesFollow());
@@ -100,6 +117,9 @@ export default function SingleUser() {
 
   React.useEffect(() => {
     //runs on mount and whenever state(id) changes
+    // console.log(titles);
+    // getAllUser();
+    // console.log(users);
 
     const newUser = users.find((item) => {
       if (parseInt(id) === item.id) return item;
@@ -119,9 +139,10 @@ export default function SingleUser() {
     // console.log(follow, newFollows);
     // console.log(skill, newSkill);  // changes will not reflect in this console.log Refer, https://stackoverflow.com/questions/54069253/usestate-set-method-not-reflecting-change-immediately
     // console.log(person, newUser);
-  }, [id, doesFollow]);
+  }, [id, doesFollow, user]);
+  // const url2 = `/users/${parseInt(id)}`;
 
-  if (!user.id) return <Redirect to='/' />;
+  if (!user.id) return <Redirect to='/users/189/32' />;
 
   // const notFollow = () => {
   //   //return follow btn if user.id doesn't follow id

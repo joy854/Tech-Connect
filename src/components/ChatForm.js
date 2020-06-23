@@ -15,6 +15,7 @@ export default function ChatForm() {
     insertChatByUser,
     getChats,
     setAllChats,
+    token,
   } = React.useContext(UserContext);
   //   console.log(id_to, userDetails.id);
 
@@ -25,7 +26,7 @@ export default function ChatForm() {
   }
 
   React.useEffect(() => {
-    console.log(userDetails);
+    // console.log(userDetails);
     getChats(); //will result in error when user signs out
     if (window.performance) {
       if (performance.navigation.type == 1) {
@@ -37,7 +38,7 @@ export default function ChatForm() {
     // console.log('comments', visibleComments);
   }, []);
 
-  if (!user.id) return <Redirect to='/' />;
+  if (!token) return <Redirect to='/' />;
   return (
     <section className='section mid-container'>
       <form>
@@ -60,7 +61,7 @@ export default function ChatForm() {
               placeholder='Write Something Here....'
               value={chatText}
               onChange={(e) => {
-                console.log(userDetails);
+                // console.log(userDetails);
                 setChatText(e.target.value);
               }}
             ></textarea>
@@ -72,7 +73,7 @@ export default function ChatForm() {
             onClick={() => {
               insertChatByUser(id_to);
               setChatText('');
-              console.log(userDetails);
+              // console.log(userDetails);
               //   console.log(postsOfUser);
               // toggleBtnClick();
             }}
