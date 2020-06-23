@@ -61,9 +61,11 @@ function UserProvider({ children }) {
 
   async function getLikes() {
     // let userid = user.id;
-
+    // console.log(token);
     const response = await axios
-      .get('https://guarded-woodland-97115.herokuapp.com/getLikes', {})
+      .get('https://guarded-woodland-97115.herokuapp.com/getLikes', {
+        headers: { authorization: `Bearer ${token}` },
+      })
       .then((res) => {
         // console.log('likes', res.data);
         // localStorage.setItem('likes', JSON.stringify(res.data));
@@ -76,11 +78,17 @@ function UserProvider({ children }) {
 
   async function insertLike(curr_user_id, post_owner_id, post_id) {
     const response = await axios
-      .post('https://guarded-woodland-97115.herokuapp.com/insertlike', {
-        curr_user_id,
-        post_owner_id,
-        post_id,
-      })
+      .post(
+        'https://guarded-woodland-97115.herokuapp.com/insertlike',
+        {
+          curr_user_id,
+          post_owner_id,
+          post_id,
+        },
+        {
+          headers: { authorization: `Bearer ${token}` },
+        }
+      )
       .then((res) => {
         // console.log('insert like', res.data);
         return res.data;
@@ -100,11 +108,17 @@ function UserProvider({ children }) {
 
   async function deleteLike(curr_user_id, post_owner_id, post_id) {
     const response = await axios
-      .post('https://guarded-woodland-97115.herokuapp.com/deleteLike', {
-        curr_user_id,
-        post_owner_id,
-        post_id,
-      })
+      .post(
+        'https://guarded-woodland-97115.herokuapp.com/deleteLike',
+        {
+          curr_user_id,
+          post_owner_id,
+          post_id,
+        },
+        {
+          headers: { authorization: `Bearer ${token}` },
+        }
+      )
       .then((res) => {
         // console.log('delete like', res.data);
         return res.data;
@@ -123,9 +137,15 @@ function UserProvider({ children }) {
       return;
     }
     const response = await axios
-      .post('https://guarded-woodland-97115.herokuapp.com/getPosts', {
-        userid,
-      })
+      .post(
+        'https://guarded-woodland-97115.herokuapp.com/getPosts',
+        {
+          userid,
+        },
+        {
+          headers: { authorization: `Bearer ${token}` },
+        }
+      )
       .then((res) => {
         // console.log('posts', res.data);
         // localStorage.setItem('posts', JSON.stringify(res.data));
@@ -143,9 +163,15 @@ function UserProvider({ children }) {
       return;
     }
     const response = await axios
-      .post('https://guarded-woodland-97115.herokuapp.com/getComments', {
-        userid,
-      })
+      .post(
+        'https://guarded-woodland-97115.herokuapp.com/getComments',
+        {
+          userid,
+        },
+        {
+          headers: { authorization: `Bearer ${token}` },
+        }
+      )
       .then((res) => {
         // console.log('comments', res.data);
         // localStorage.setItem('comments', JSON.stringify(res.data));
@@ -158,9 +184,15 @@ function UserProvider({ children }) {
 
   async function getDetails(userid) {
     const response = await axios
-      .post('https://guarded-woodland-97115.herokuapp.com/getDetails', {
-        userid,
-      })
+      .post(
+        'https://guarded-woodland-97115.herokuapp.com/getDetails',
+        {
+          userid,
+        }
+        // {
+        //   headers: { authorization: `Bearer ${token}` },
+        // }
+      )
       .then((res) => {
         // console.log('user', res.data);
         // localStorage.setItem('detail', JSON.stringify(res.data));
@@ -174,7 +206,9 @@ function UserProvider({ children }) {
   async function getChats() {
     // let userid = user.id;
     const response = await axios
-      .get('https://guarded-woodland-97115.herokuapp.com/getChats', {})
+      .get('https://guarded-woodland-97115.herokuapp.com/getChats', {
+        headers: { authorization: `Bearer ${token}` },
+      })
       .then((res) => {
         // localStorage.setItem('chats', JSON.stringify(res.data));
         setAllChats(res.data);
@@ -203,11 +237,17 @@ function UserProvider({ children }) {
       return;
     }
     const response = await axios
-      .post('https://guarded-woodland-97115.herokuapp.com/deleteComment', {
-        id,
-        comment_id,
-        post_id,
-      })
+      .post(
+        'https://guarded-woodland-97115.herokuapp.com/deleteComment',
+        {
+          id,
+          comment_id,
+          post_id,
+        },
+        {
+          headers: { authorization: `Bearer ${token}` },
+        }
+      )
       .then((res) => {
         // console.log('comments', res.data);
         return res.data;
@@ -246,17 +286,23 @@ function UserProvider({ children }) {
       return;
     }
     const response = await axios
-      .post('https://guarded-woodland-97115.herokuapp.com/insertComment', {
-        username,
-        fname,
-        lname,
-        commenter_id,
-        id,
-        post_id,
-        image,
-        content,
-        comment_id,
-      })
+      .post(
+        'https://guarded-woodland-97115.herokuapp.com/insertComment',
+        {
+          username,
+          fname,
+          lname,
+          commenter_id,
+          id,
+          post_id,
+          image,
+          content,
+          comment_id,
+        },
+        {
+          headers: { authorization: `Bearer ${token}` },
+        }
+      )
       .then((res) => {
         // console.log('comments', res.data);
         return res.data;
@@ -302,7 +348,9 @@ function UserProvider({ children }) {
   };
   async function getAllUser() {
     const response = await axios
-      .get('https://guarded-woodland-97115.herokuapp.com/users')
+      .get('https://guarded-woodland-97115.herokuapp.com/users', {
+        headers: { authorization: `Bearer ${token}` },
+      })
       .then((res) => {
         // console.log(res.data);
         setUsers(res.data);
@@ -312,16 +360,22 @@ function UserProvider({ children }) {
   }
   async function insertChat(userid, newId) {
     const response = await axios
-      .post('https://guarded-woodland-97115.herokuapp.com/insertChat', {
-        id_from: userDetails.id,
-        id_to: userid,
-        chat_id: newId,
-        from_fname: userDetails.fname,
-        to_fname: '',
-        msg: chatText,
-        image_from: userDetails.image,
-        image_to: '',
-      })
+      .post(
+        'https://guarded-woodland-97115.herokuapp.com/insertChat',
+        {
+          id_from: userDetails.id,
+          id_to: userid,
+          chat_id: newId,
+          from_fname: userDetails.fname,
+          to_fname: '',
+          msg: chatText,
+          image_from: userDetails.image,
+          image_to: '',
+        },
+        {
+          headers: { authorization: `Bearer ${token}` },
+        }
+      )
       .then((res) => {
         // console.log('user', res.data);
         return res.data;
@@ -355,6 +409,8 @@ function UserProvider({ children }) {
     getComments(item.id);
     getChats();
     getLikes();
+    return <Redirect to='/' />;
+
     // console.log(item.id, item.username, userDetails);
     // console.log('posts', postsOfUser);
     // console.log('comments', visibleComments);

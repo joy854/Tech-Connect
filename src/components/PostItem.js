@@ -86,7 +86,7 @@ export default function PostItem({ element }) {
   };
   const like = (e) => {
     e.preventDefault();
-    console.log('like');
+    // console.log('like');
     setLikeUnlike(true);
     const item = {
       curr_user_id: user.id,

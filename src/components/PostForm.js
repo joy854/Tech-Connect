@@ -130,7 +130,7 @@ export default function PostForm() {
             value='Create Post'
             onClick={() => {
               submitPost();
-              console.log(postsOfUser);
+              // console.log(postsOfUser);
               // localStorage.setItem('posts', JSON.stringify(postsOfUser));
 
               // toggleBtnClick();

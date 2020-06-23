@@ -23,7 +23,7 @@ const UsersContext = React.createContext();
 // }
 
 function UsersProvider({ children }) {
-  const { user } = React.useContext(UserContext);
+  const { user, token } = React.useContext(UserContext);
 
   // const [users, setUsers] = React.useState(getUsersFromLocalStorage());
   // const [titles, setTitles] = React.useState(getTitlesFromLocalStorage());
@@ -32,7 +32,9 @@ function UsersProvider({ children }) {
   // );
   async function getAllUser() {
     const response = await axios
-      .get('https://guarded-woodland-97115.herokuapp.com/users')
+      .get('https://guarded-woodland-97115.herokuapp.com/users', {
+        headers: { authorization: `Bearer ${token}` },
+      })
       .then((res) => {
         // console.log(res.data);
         setUsers(res.data);
@@ -70,10 +72,16 @@ function UsersProvider({ children }) {
     let from_id = user.id,
       to_id = id;
     const response = await axios
-      .post('https://guarded-woodland-97115.herokuapp.com/insertFollowers', {
-        from_id,
-        to_id,
-      })
+      .post(
+        'https://guarded-woodland-97115.herokuapp.com/insertFollowers',
+        {
+          from_id,
+          to_id,
+        },
+        {
+          headers: { authorization: `Bearer ${token}` },
+        }
+      )
       .catch((error) => console.log(error));
     toggleFollowBtnClickUnclick();
     return response;
@@ -82,10 +90,16 @@ function UsersProvider({ children }) {
     let from_id = user.id,
       to_id = id;
     const response = await axios
-      .post('https://guarded-woodland-97115.herokuapp.com/deleteFollowers', {
-        from_id,
-        to_id,
-      })
+      .post(
+        'https://guarded-woodland-97115.herokuapp.com/deleteFollowers',
+        {
+          from_id,
+          to_id,
+        },
+        {
+          headers: { authorization: `Bearer ${token}` },
+        }
+      )
       .catch((error) => console.log(error));
     toggleFollowBtnClickUnclick();
     return response;
@@ -120,7 +134,9 @@ function UsersProvider({ children }) {
 
   async function getAllTitle() {
     const response = await axios
-      .get('https://guarded-woodland-97115.herokuapp.com/getSkills')
+      .get('https://guarded-woodland-97115.herokuapp.com/getSkills', {
+        headers: { authorization: `Bearer ${token}` },
+      })
       .then((res) => {
         // console.log(res.data);
         setTitles(res.data);
@@ -133,7 +149,9 @@ function UsersProvider({ children }) {
 
   async function getAllFollower() {
     const response = await axios
-      .get('https://guarded-woodland-97115.herokuapp.com/getFollowers')
+      .get('https://guarded-woodland-97115.herokuapp.com/getFollowers', {
+        headers: { authorization: `Bearer ${token}` },
+      })
       .then((res) => {
         // console.log(res.data);
         setFollowers(res.data);

@@ -9,9 +9,9 @@ import { Link } from 'react-router-dom';
 
 export default function SingleUser() {
   const { id } = useParams();
-  const { user, token, users } = React.useContext(UserContext);
+  const { user, token } = React.useContext(UserContext);
   const {
-    // users,
+    users,
     titles,
     followers,
     followBtn,

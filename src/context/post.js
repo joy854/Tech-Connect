@@ -103,10 +103,16 @@ function PostProvider({ children }) {
     }
 
     const response = await axios
-      .post('https://guarded-woodland-97115.herokuapp.com/deletePost', {
-        id,
-        postid,
-      })
+      .post(
+        'https://guarded-woodland-97115.herokuapp.com/deletePost',
+        {
+          id,
+          postid,
+        },
+        {
+          headers: { authorization: `Bearer ${token}` },
+        }
+      )
       .then((res) => {
         // console.log(res.data);
         return res.data;
