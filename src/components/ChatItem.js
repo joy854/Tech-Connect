@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function ChatItem({ element }) {
   return (
-    <div class='row'>
+    <div class='row orientation'>
       <div class='col-md-2'>
         <img
           src={element.image_from}
