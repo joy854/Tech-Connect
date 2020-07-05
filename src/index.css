@@ -23,6 +23,29 @@
   --fullWidth: 1170px;
 }
 
+form .form-control::-webkit-input-placeholder {
+  opacity: 0.7;
+  color: #fff;
+}
+
+form .form-control::-moz-placeholder {
+  opacity: 0.7;
+  color: #fff;
+}
+
+form .form-control::-ms-placeholder {
+  opacity: 0.7;
+  color: #fff;
+}
+
+form .form-control::placeholder {
+  color: #fff;
+  opacity: 0.7;
+}
+::placeholder {
+  color: #fff;
+  opacity: 0.7;
+}
 body {
   min-height: 100vh;
   position: relative;

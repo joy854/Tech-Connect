@@ -30,7 +30,7 @@ export default function ChatForm() {
     getChats(); //will result in error when user signs out
     if (window.performance) {
       if (performance.navigation.type == 1) {
-        setAllChats(getChatsDetailFromLocalStorage());
+        // setAllChats(getChatsDetailFromLocalStorage());
         // alert('This page is reloaded');
       }
     }
@@ -56,8 +56,16 @@ export default function ChatForm() {
               onChange={handleSingleSkill}
             /> */}
             <textarea
+              className='orientation'
               id='newpost'
-              style={{ width: '70%', height: '150px' }}
+              style={{
+                width: '70%',
+                height: '150px',
+                // backgroundColor: '#2A2A2A',
+                border: '1px solid white',
+                color: 'white',
+                textAlign: 'left',
+              }}
               placeholder='Write Something Here....'
               value={chatText}
               onChange={(e) => {

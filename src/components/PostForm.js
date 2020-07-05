@@ -101,7 +101,15 @@ export default function PostForm() {
             /> */}
             <div className='input-post'>
               <textarea
-                style={{ width: '100%', height: '300px' }}
+                className='orientation'
+                style={{
+                  width: '100%',
+                  height: '300px',
+                  // backgroundColor: '#2A2A2A',
+                  border: '1px solid white',
+                  color: 'white',
+                  textAlign: 'left',
+                }}
                 id='newpost'
                 placeholder='Write Something Here....'
                 value={text}
@@ -112,7 +120,12 @@ export default function PostForm() {
               <p>
                 <input
                   type='text'
-                  className='form-control'
+                  className='form-control orientation'
+                  style={{
+                    border: '1px solid white',
+                    color: 'white',
+                    textAlign: 'left',
+                  }}
                   id='url'
                   name='url'
                   placeholder='Enter Image Url (Optional)'
